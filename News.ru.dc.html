@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  body{margin:0}
+  a{color:#9c2f22;text-decoration:none}
+  a:hover{text-decoration:underline}
+  ::selection{background:#111;color:#fff}
+  .post-row:hover .post-title{color:#9c2f22}
+  .post-row:hover .post-arrow{transform:translateX(3px)}
+</style>
+</helmet>
+
+<div style="background:#fff;color:#111;font-family:'Newsreader',serif;min-height:100vh;display:flex;flex-direction:column">
+
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 40px;border-bottom:2px solid #111">
+    <a href="Home.ru.dc.html" style="font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:#111;letter-spacing:.01em">Легкодымов</a>
+    <div style="display:flex;gap:8px;font:600 12px 'IBM Plex Mono',monospace">
+      <a href="News.ru.dc.html" style="padding:3px 8px;background:#111;color:#fff">RU</a>
+      <a href="News.dc.html" style="padding:3px 8px;color:#666">EN</a>
+    </div>
+  </div>
+
+  <nav style="display:flex;gap:26px;padding:14px 40px;border-bottom:1px solid #ddd;font:600 12px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.05em;color:#555">
+    <a href="Home.ru.dc.html" style="color:#555">Главная</a>
+    <a href="News.ru.dc.html" style="color:#111;border-bottom:2px solid #9c2f22;padding-bottom:2px">Новости</a>
+    <a href="Media.ru.dc.html" style="color:#555">СМИ</a>
+    <a href="Documents.ru.dc.html" style="color:#555">Документы суда</a>
+    <a href="Library.ru.dc.html" style="color:#555">Библиотека</a>
+    <a href="Contacts.ru.dc.html" style="color:#555">Контакты</a>
+  </nav>
+
+  <sc-if value="{{ hasActive }}" hint-placeholder-val="{{ false }}">
+    <main style="flex:1;max-width:680px;margin:0 auto;padding:48px 32px 90px;width:100%;box-sizing:border-box">
+      <a href="#" style="font:600 11.5px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.05em;color:#888;display:inline-block;margin-bottom:28px">← Все посты</a>
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px">
+        <span style="font:600 10.5px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.06em;color:#9c2f22;background:#faeeec;padding:3px 9px;border-radius:2px">{{ activePost.tag }}</span>
+        <span style="font:500 12px 'IBM Plex Mono',monospace;color:#888">{{ activePost.date }}</span>
+      </div>
+      <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:34px;line-height:1.2;margin:0 0 26px;color:#111">{{ activePost.title }}</h1>
+      <div style="font-size:17px;line-height:1.8;color:#222">
+        <sc-for list="{{ activePost.paragraphs }}" as="para" hint-placeholder-count="3">
+          <p style="margin:0 0 18px">{{ para }}</p>
+        </sc-for>
+      </div>
+      <sc-if value="{{ activePost.linkUrl }}" hint-placeholder-val="{{ false }}">
+        <a href="{{ activePost.linkUrl }}" style="font:600 12px 'IBM Plex Mono',monospace;display:inline-block;margin-top:8px">{{ activePost.linkLabel }} →</a>
+      </sc-if>
+      <div style="margin-top:56px;padding-top:24px;border-top:1px solid #e4e4e4">
+        <a href="#" style="font:600 12px 'IBM Plex Mono',monospace;color:#111">← Ко всем постам</a>
+      </div>
+    </main>
+  </sc-if>
+
+  <sc-if value="{{ showList }}" hint-placeholder-val="{{ true }}">
+    <main style="flex:1;max-width:720px;margin:0 auto;padding:48px 32px 80px;width:100%;box-sizing:border-box">
+      <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:34px;margin:0 0 8px">Новости</h1>
+      <p style="color:#666;font-size:14px;margin:0 0 44px">Обновления и заявления Анатолия, публикуются по мере событий.</p>
+
+      <div>
+        <sc-for list="{{posts}}" as="post" hint-placeholder-count="5">
+          <a class="post-row" href="{{ post.href }}" style="display:block;padding:26px 0;border-top:1px solid #e4e4e4;text-decoration:none;color:inherit">
+            <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">
+              <span style="font:600 10.5px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.06em;color:#9c2f22;background:#faeeec;padding:3px 9px;border-radius:2px">{{ post.tag }}</span>
+              <span style="font:500 12px 'IBM Plex Mono',monospace;color:#888">{{ post.date }}</span>
+            </div>
+            <h2 class="post-title" style="font-family:'Fraunces',serif;font-weight:600;font-size:23px;line-height:1.3;margin:0 0 10px;color:#111;transition:color .15s">{{ post.title }}</h2>
+            <p style="font-size:15px;line-height:1.65;color:#555;margin:0 0 10px;max-width:64ch">{{ post.excerpt }}</p>
+            <span style="font:600 11.5px 'IBM Plex Mono',monospace;color:#9c2f22;display:inline-flex;align-items:center;gap:5px">Читать <span class="post-arrow" style="display:inline-block;transition:transform .15s">→</span></span>
+          </a>
+        </sc-for>
+      </div>
+
+    </main>
+  </sc-if>
+
+  <footer style="background:#111;color:#eaeaea;padding:32px 40px;font-family:'IBM Plex Mono',monospace">
+    <div style="max-width:720px;margin:0 auto">
+      <div style="font-size:13px;line-height:1.9;color:#cfcfcf">
+        <b style="color:#fff">Email:</b> <a href="mailto:legkomedia@mm.st" style="color:#f0ded9">legkomedia@mm.st</a> &nbsp;·&nbsp;
+        <b style="color:#fff">Telegram:</b> <a href="https://t.me/legkodymov" style="color:#f0ded9">@legkodymov</a> &nbsp;·&nbsp;
+        <a href="https://t.me/anatolylegkodymov" style="color:#f0ded9">Канал с обновлениями</a>
+      </div>
+      <div style="margin-top:18px;font-size:11.5px;color:#999;border-top:1px solid #333;padding-top:16px">
+        Воспроизведение этого материала без указания источника строго запрещено.
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  // ── Новые посты добавляйте сюда, сначала самые новые. Поля: slug (для ссылки, напр. #my-post),
+  // date, tag, title, paragraphs (массив строк). linkUrl/linkLabel — необязательные (ссылка на источник).
+  // excerpt — необязательное поле; если не указано, на странице списка используется первый абзац.
+  state = {
+    activeSlug: null,
+    posts: [
+      {
+        slug: "case-closed-france-still-chasing",
+        date: "2 июля 2026",
+        tag: "Комментарий",
+        title: "Дело закрыто, а Франция всё ещё гоняется за мной на деньги своих налогоплательщиков.",
+        paragraphs: [
+          "Дело закрыто, а Франция всё ещё гоняется за мной на деньги своих налогоплательщиков. Лучше бы занялись теми 77 случаями похищений и разбоя, которые творятся у них под носом.",
+          "Каждая страна мечтает стать криптостолицей мира (ОАЭ, США, Сингапур). Но Франция, похоже, уже всех переплюнула"
+        ],
+        linkUrl: "https://crypto.news/france-reports-77-crypto-kidnapping-and-extortion-cases-in-2026/",
+        linkLabel: "Источник"
+      },
+      {
+        slug: "thank-you-for-the-magazines",
+        date: "1 июля 2026",
+        tag: "Заметка",
+        title: "О том, чтобы читать не только новости",
+        paragraphs: [
+          "Спасибо всем, кто присылает мне журналы и газеты из России. Читать другую точку зрения — редкая возможность, и это глоток свежего воздуха."
+        ]
+      },
+      {
+        slug: "grateful-for-the-chance-to-tell-my-side",
+        date: "13 февраля 2026",
+        tag: "Заметка",
+        title: "Благодарен за возможность рассказать свою историю",
+        paragraphs: [
+          "Спасибо за возможность рассказать правду из первых уст. «Я не жалею о времени, которое посвятил разработке Bitzlato»."
+        ],
+        linkUrl: "https://www.dlnews.com/research/internal/pardon-me-a-qa-with-anatoly-legkodymov/",
+        linkLabel: "Читать материал"
+      },
+      {
+        slug: "prisoner-exchanges-russia-us",
+        date: "28 января 2026",
+        tag: "Медиа",
+        title: "Свой — чужой: обмен заключёнными между Россией и США",
+        paragraphs: [
+          "Разговор об обмене заключёнными между Россией и США, включая историю задержанного российского инженера — и о том, как США и Европа пытаются лишить Россию главного ресурса: людей."
+        ],
+        linkUrl: "https://vkvideo.ru/video-20648295_456252592",
+        linkLabel: "Смотреть видео"
+      },
+      {
+        slug: "cz-pardon-war-not-over-for-everyone",
+        date: "23 октября 2025",
+        tag: "Комментарий",
+        title: "Трамп помиловал основателя Binance — но не для всех война окончена",
+        paragraphs: [
+          "«Президент Трамп воспользовался своим конституционным правом и помиловал господина Чжао, которого администрация Байдена преследовала в рамках своей войны против криптовалюты», — заявила пресс-секретарь Белого дома Каролин Левитт. — «Война администрации Байдена с криптоиндустрией окончена», — подчеркнула она.",
+          "К сожалению, для некоторых эта война всё ещё продолжается."
+        ],
+        linkUrl: "https://www.wsj.com/finance/currencies/trump-binance-changpeng-zhao-pardon-7509bd63",
+        linkLabel: "Источник"
+      },
+      {
+        slug: "p2p-deals-part-1",
+        date: "21 октября 2025",
+        tag: "Аналитика",
+        title: "Как на самом деле устроены P2P-сделки в крипте — часть I",
+        paragraphs: [
+          "Истории про таинственного крипто-магната, финансирующего тёмные схемы и прогоняющего $700 000 000 — отличный заголовок. В них нет ни слова правды: это фантазия некомпетентных журналистов и прокуроров.",
+          "Вот как на самом деле работает P2P-обмен криптовалюты: вы находите продавца биткоина, отправляете деньги, он отправляет биткоин по согласованному курсу. Это прямое взаимодействие двух людей, без посредника, удерживающего средства.",
+          "LocalBitcoins стал пионером этой модели в 2012 году — доска объявлений, где покупатели и продавцы находили друг друга, а монеты временно блокировались только для защиты от мошенничества во время сделки. Торговля через банки и платёжные системы делала сделки быстрыми — часто 10–20 минут.",
+          "В 2018 году мы получили первый запрос от российских правоохранительных органов. Мы никогда не собирались покрывать незаконную деятельность и располагали достаточной информацией: каждый продавец в каждой сделке указывал реальные банковские реквизиты, без них перевод просто невозможен. Тогда мы получали только положительные отзывы от следователей.",
+          "После моего ареста СМИ и прокуроры вдруг заголосили об «анонимности» сервиса, который фиксировал точные банковские реквизиты по каждой сделке. Что-то тут не сходится."
+        ]
+      },
+      {
+        slug: "extradition-legal-analysis",
+        date: "19 октября 2025",
+        tag: "Аналитика",
+        title: "Должен ли Анатолий Легкодымов быть экстрадирован во Францию? Правовой анализ",
+        paragraphs: [
+          "Анатолий Легкодымов уже отбыл 18 месяцев под стражей в США и был приговорён к сроку, равному отбытому, в июле 2024 года, признав вину в ведении нелицензированного бизнеса по переводу денег. Несмотря на отбытие наказания, он остаётся под стражей из-за французского запроса об экстрадиции, построенного по сути на тех же фактах.",
+          "Сильнейший аргумент против экстрадиции — принцип ne bis in idem, запрет судить человека дважды за одно и то же деяние, признанный МПГПП, Европейской конвенцией по правам человека и Хартией основных прав ЕС. Юристы называют французские обвинения по сути «копипастой» американских.",
+          "Сами сроки вызывают вопросы: по имеющимся данным, французская прокуратура использовала задержку в процедуре депортации, чтобы собрать новые обвинения и подать запрос об экстрадиции — это больше похоже на попытку обойти окончательность американского дела, чем на самостоятельный французский интерес."
+        ]
+      },
+      {
+        slug: "double-jeopardy",
+        date: "1 марта 2025",
+        tag: "Обновление",
+        title: "Двойное наказание за одно и то же",
+        paragraphs: [
+          "18 июля 2024 года Анатолий добился снятия всех обвинений в суде США и получил минимально возможный приговор — срок, равный уже отбытому. По всем признакам его должны были освободить немедленно.",
+          "Вместо этого его перевели в иммиграционный изолятор — формальность, которая должна была занять несколько дней. Дважды судья подписывал решение о депортации в Россию; дважды ничего не происходило — процесс застревал в бюрократических проволочках.",
+          "У этой задержки была цель: французская прокуратура использовала время, чтобы собрать новые обвинения — по сути копию американских — и подать запрос об экстрадиции. Наказывать человека дважды за одно и то же — это нарушение самых базовых принципов правосудия."
+        ]
+      },
+      {
+        slug: "bitzlato-aftermath",
+        date: "19 декабря 2024",
+        tag: "Обновление",
+        title: "О последствиях для Bitzlato",
+        paragraphs: [
+          "Даже в страшном сне я не мог представить, что половина компании проведёт два года за решёткой, отбиваясь от необоснованных обвинений — в то время как оставшиеся на свободе руководители заняты не восстановлением репутации компании, а растаскиванием Bitzlato по кускам, чтобы строить новые проекты на его обломках."
+        ],
+        linkUrl: "https://t.me/BZ_support/9",
+        linkLabel: "Источник"
+      },
+      {
+        slug: "ethereum-lead-dev-lost",
+        date: "6 декабря 2024",
+        tag: "Комментарий",
+        title: "Ведущий разработчик Ethereum в растерянности. А вы разобрались?",
+        paragraphs: [
+          "Новости доходят до меня медленно. Я только недавно узнал, что ведущий разработчик Ethereum публично сравнил крипто-индустрию с огромным казино. Неудивительно.",
+          "Общий нарратив вокруг крипты постоянно затуманивает то, зачем вообще был создан биткоин — как ответ на валюты, которые государства всегда обесценивали. Если хотите больше подобных размышлений — в моём списке рекомендаций есть что почитать."
+        ],
+        linkUrl: "Library.ru.dc.html",
+        linkLabel: "Смотреть библиотеку"
+      },
+      {
+        slug: "pardon-people-not-poultry",
+        date: "27 ноября 2024",
+        tag: "Открытое письмо",
+        title: "Помилуйте людей, а не индейку",
+        paragraphs: [
+          "Уважаемый господин президент — эти люди получили ценный опыт через судебные процессы в индустрии, где чёткое регулирование бизнеса ещё не сформировано. Они готовы приносить пользу обществу прямо сейчас. Пожалуйста, помилуйте их:",
+          "Вирджил Гриффит · Роман Стерлигов · Иэн Фримен · Роман Шторм · Сэм Бэнкман-Фрид и команда FTX · Алексей Андрюнин (GotBit) · Дмитрий Васильев (WEX, задержан в Польше)",
+          "#PardonPeopleNotPoultry"
+        ]
+      },
+      {
+        slug: "black-hole-of-american-justice",
+        date: "21 ноября 2024",
+        tag: "Обновление",
+        title: "Чёрная дыра американского правосудия",
+        paragraphs: [
+          "Более четырёх месяцев назад меня отпустили из зала суда свободным человеком. Эта свобода не продлилась и секунды — с 19 июля я нахожусь в иммиграционном изоляторе, а ФБР «случайно» потеряло мой паспорт.",
+          "Дважды судья одобрял моё добровольное выбытие из США. Каждый раз Министерство внутренней безопасности блокировало это решение — сначала сославшись на французский ордер на арест, затем подав собственную апелляцию — отправляя дело в подвешенное состояние перед апелляционной коллегией без каких-либо сроков.",
+          "Иммиграционные и уголовные тюрьмы в США — это коммерческие структуры, торгующиеся на бирже. Документы теряются часто, а люди месяцами ждут решения даже из дружественных стран. Акции частной тюремной компании, где меня держат, выросли вдвое за последний месяц."
+        ]
+      },
+      {
+        slug: "they-are-after-all-of-you",
+        date: "14 ноября 2024",
+        tag: "Комментарий",
+        title: "Они охотятся за всеми вами",
+        paragraphs: [
+          "Регуляторы США сообщили о 50 000 открытых дел против компаний, связанных с переводом денег, включая крипто-платформы. Это число будет только расти. На фоне более чем 2 миллионов заключённых в США места в американских тюрьмах хватит на всех."
+        ]
+      },
+      {
+        slug: "media-coverage-and-case-materials",
+        date: "1 ноября 2024",
+        tag: "Заявление",
+        title: "О освещении в СМИ и материалах дела",
+        paragraphs: [
+          "Множество изданий опубликовали недостоверную информацию обо мне и моём деле — цифры и фразы, вырванные из контекста ради громких заголовков, без документальных подтверждений и без единой проверки фактов.",
+          "Моя команда юристов проделала огромную работу, и я намерен сделать все материалы дела публичными. Юридические документы — главный источник истины: меморандум о назначении наказания, включая независимую экспертную оценку деятельности компании, уже опубликован на сайте, и это только начало."
+        ],
+        linkUrl: "Documents.ru.dc.html",
+        linkLabel: "Смотреть документы суда"
+      },
+      {
+        slug: "first-statement-since-release",
+        date: "17 октября 2024",
+        tag: "Заявление",
+        title: "Первое заявление после освобождения",
+        paragraphs: [
+          "Следствие завершено, и я жду отправки домой — или во Францию. Я по-прежнему ограничен в общении, поэтому картина происходящего у меня фрагментарна. Почти два года без интернета в мире IT и крипты — само по себе катастрофа.",
+          "Я не имел никакого отношения к тому, чем занималась компания эти два года, и никак не связан с проектами, которые продвигают на старых каналах Bitzlato. Когда меня арестовали, все активы компании перешли к оставшимся основателям и сотрудникам, кроме средств, изъятых французскими властями — у меня не осталось никаких материальных активов.",
+          "За полгода до ареста я хотел закрыть компанию — я уже вышел из основателей Bitzlato Ltd. Hong Kong. Я желаю нынешнему руководству успеха в закрытии компании и выплате оставшихся средств — насколько я понимаю, пользователи, подавшие заявки в течение девяти месяцев, получили компенсацию в полном объёме."
+        ]
+      }
+    ]
+  };
+
+  componentDidMount() {
+    this.syncFromHash();
+    this._onHashChange = () => this.syncFromHash();
+    window.addEventListener("hashchange", this._onHashChange);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("hashchange", this._onHashChange);
+  }
+  syncFromHash() {
+    const slug = decodeURIComponent((location.hash || "").replace(/^#/, ""));
+    this.setState({ activeSlug: slug || null });
+  }
+
+  renderVals() {
+    const posts = this.state.posts.map(p => ({
+      ...p,
+      href: "#" + p.slug,
+      excerpt: p.excerpt || (p.paragraphs[0].length > 150 ? p.paragraphs[0].slice(0, 150).trim() + "…" : p.paragraphs[0])
+    }));
+    const activePost = posts.find(p => p.slug === this.state.activeSlug) || null;
+    return {
+      posts,
+      activePost,
+      hasActive: !!activePost,
+      showList: !activePost
+    };
+  }
+}
+
+</script>
+</body>
+</html>

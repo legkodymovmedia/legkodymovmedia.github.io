@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  body{margin:0}
+  a{color:#9c2f22;text-decoration:none}
+  a:hover{text-decoration:underline}
+</style>
+</helmet>
+
+<div style="background:#fff;color:#111;font-family:'Newsreader',serif;min-height:100vh;display:flex;flex-direction:column">
+
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 40px;border-bottom:2px solid #111">
+    <a href="Home.ru.dc.html" style="font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:#111;letter-spacing:.01em">Легкодымов</a>
+    <div style="display:flex;gap:8px;font:600 12px 'IBM Plex Mono',monospace">
+      <a href="Documents.ru.dc.html" style="padding:3px 8px;background:#111;color:#fff">RU</a>
+      <a href="Documents.dc.html" style="padding:3px 8px;color:#666">EN</a>
+    </div>
+  </div>
+
+  <nav style="display:flex;gap:26px;padding:14px 40px;border-bottom:1px solid #ddd;font:600 12px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.05em;color:#555">
+    <a href="Home.ru.dc.html" style="color:#555">Главная</a>
+    <a href="News.ru.dc.html" style="color:#555">Новости</a>
+    <a href="Media.ru.dc.html" style="color:#555">СМИ</a>
+    <a href="Documents.ru.dc.html" style="color:#111;border-bottom:2px solid #9c2f22;padding-bottom:2px">Документы суда</a>
+    <a href="Library.ru.dc.html" style="color:#555">Библиотека</a>
+    <a href="Contacts.ru.dc.html" style="color:#555">Контакты</a>
+  </nav>
+
+  <main style="flex:1;max-width:760px;margin:0 auto;padding:48px 32px 80px;width:100%;box-sizing:border-box">
+    <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:34px;margin:0 0 8px">Документы суда</h1>
+    <p style="color:#666;font-size:14px;margin:0 0 8px;max-width:56ch">Юридические документы — главный источник правды. Материалы дела, решения суда и экспертные заключения публикуются здесь по мере появления.</p>
+    <p style="color:#9c2f22;font-size:12.5px;font-family:'IBM Plex Mono',monospace;margin:0 0 40px">Чтобы добавить документ: положите PDF в /documents и добавьте строку ниже с названием, датой, категорией и путём к файлу.</p>
+
+    <sc-for list="{{ documents }}" as="doc" hint-placeholder-count="3">
+      <a href="{{ doc.file }}" style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid #e4e4e4;text-decoration:none;color:inherit">
+        <div>
+          <div style="font:600 10.5px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.06em;color:#9c2f22;margin-bottom:6px">{{ doc.category }} · {{ doc.date }}</div>
+          <div style="font-size:17px;color:#111">{{ doc.title }}</div>
+        </div>
+        <div style="font:600 11px 'IBM Plex Mono',monospace;color:#888;white-space:nowrap">PDF ↓</div>
+      </a>
+    </sc-for>
+
+  </main>
+
+  <footer style="background:#111;color:#eaeaea;padding:32px 40px;font-family:'IBM Plex Mono',monospace">
+    <div style="max-width:760px;margin:0 auto">
+      <div style="font-size:13px;line-height:1.9;color:#cfcfcf">
+        <b style="color:#fff">Email:</b> <a href="mailto:legkomedia@mm.st" style="color:#f0ded9">legkomedia@mm.st</a> &nbsp;·&nbsp;
+        <b style="color:#fff">Telegram:</b> <a href="https://t.me/legkodymov" style="color:#f0ded9">@legkodymov</a>
+      </div>
+      <div style="margin-top:18px;font-size:11.5px;color:#999;border-top:1px solid #333;padding-top:16px">
+        Воспроизведение этого материала без указания источника строго запрещено.
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  // ── Добавляйте новые документы сюда. `file` должен указывать на PDF, размещённый в проекте
+  // (например "documents/sentencing-memo.pdf"). Пути ниже — заглушки до загрузки реальных файлов.
+  state = {
+    documents: [
+      { date: "18 июля 2024", category: "Приговор", title: "Меморандум о назначении наказания", file: "documents/sentencing-memorandum.pdf" },
+      { date: "18 июля 2024", category: "Экспертиза", title: "Заключение независимого крипто-эксперта — аудит деятельности компании", file: "documents/crypto-expert-report.pdf" },
+      { date: "Декабрь 2023", category: "Сделка со следствием", title: "Соглашение о признании вины", file: "documents/plea-agreement.pdf" }
+    ]
+  };
+  renderVals() {
+    return { documents: this.state.documents };
+  }
+}
+
+</script>
+</body>
+</html>

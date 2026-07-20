@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  body{margin:0}
+  a{color:#9c2f22;text-decoration:none}
+  a:hover{text-decoration:underline}
+  ::selection{background:#111;color:#fff}
+  .post-row:hover .post-title{color:#9c2f22}
+  .post-row:hover .post-arrow{transform:translateX(3px)}
+</style>
+</helmet>
+
+<div style="background:#fff;color:#111;font-family:'Newsreader',serif;min-height:100vh;display:flex;flex-direction:column">
+
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 40px;border-bottom:2px solid #111">
+    <a href="index.html" style="font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:#111;letter-spacing:.01em">Legkodymov</a>
+    <div style="display:flex;gap:8px;font:600 12px 'IBM Plex Mono',monospace">
+      <a href="News.ru.dc.html" style="padding:3px 8px;color:#666">RU</a>
+      <a href="News.dc.html" style="padding:3px 8px;background:#111;color:#fff">EN</a>
+    </div>
+  </div>
+
+  <nav style="display:flex;gap:26px;padding:14px 40px;border-bottom:1px solid #ddd;font:600 12px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.05em;color:#555">
+    <a href="index.html" style="color:#555">Home</a>
+    <a href="News.dc.html" style="color:#111;border-bottom:2px solid #9c2f22;padding-bottom:2px">News</a>
+    <a href="Media.dc.html" style="color:#555">Media</a>
+    <a href="Documents.dc.html" style="color:#555">Court Documents</a>
+    <a href="Library.dc.html" style="color:#555">Anatoly's Library</a>
+    <a href="Contacts.dc.html" style="color:#555">Contacts</a>
+  </nav>
+
+  <sc-if value="{{ hasActive }}" hint-placeholder-val="{{ false }}">
+    <main style="flex:1;max-width:680px;margin:0 auto;padding:48px 32px 90px;width:100%;box-sizing:border-box">
+      <a href="#" style="font:600 11.5px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.05em;color:#888;display:inline-block;margin-bottom:28px">← All posts</a>
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px">
+        <span style="font:600 10.5px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.06em;color:#9c2f22;background:#faeeec;padding:3px 9px;border-radius:2px">{{ activePost.tag }}</span>
+        <span style="font:500 12px 'IBM Plex Mono',monospace;color:#888">{{ activePost.date }}</span>
+      </div>
+      <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:34px;line-height:1.2;margin:0 0 26px;color:#111">{{ activePost.title }}</h1>
+      <div style="font-size:17px;line-height:1.8;color:#222">
+        <sc-for list="{{ activePost.paragraphs }}" as="para" hint-placeholder-count="3">
+          <p style="margin:0 0 18px">{{ para }}</p>
+        </sc-for>
+      </div>
+      <sc-if value="{{ activePost.linkUrl }}" hint-placeholder-val="{{ false }}">
+        <a href="{{ activePost.linkUrl }}" style="font:600 12px 'IBM Plex Mono',monospace;display:inline-block;margin-top:8px">{{ activePost.linkLabel }} →</a>
+      </sc-if>
+      <div style="margin-top:56px;padding-top:24px;border-top:1px solid #e4e4e4">
+        <a href="#" style="font:600 12px 'IBM Plex Mono',monospace;color:#111">← Back to all posts</a>
+      </div>
+    </main>
+  </sc-if>
+
+  <sc-if value="{{ showList }}" hint-placeholder-val="{{ true }}">
+    <main style="flex:1;max-width:720px;margin:0 auto;padding:48px 32px 80px;width:100%;box-sizing:border-box">
+      <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:34px;margin:0 0 8px">News</h1>
+      <p style="color:#666;font-size:14px;margin:0 0 44px">Updates and statements from Anatoly, posted as they happen.</p>
+
+      <div>
+        <sc-for list="{{posts}}" as="post" hint-placeholder-count="5">
+          <a class="post-row" href="{{ post.href }}" style="display:block;padding:26px 0;border-top:1px solid #e4e4e4;text-decoration:none;color:inherit">
+            <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">
+              <span style="font:600 10.5px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.06em;color:#9c2f22;background:#faeeec;padding:3px 9px;border-radius:2px">{{ post.tag }}</span>
+              <span style="font:500 12px 'IBM Plex Mono',monospace;color:#888">{{ post.date }}</span>
+            </div>
+            <h2 class="post-title" style="font-family:'Fraunces',serif;font-weight:600;font-size:23px;line-height:1.3;margin:0 0 10px;color:#111;transition:color .15s">{{ post.title }}</h2>
+            <p style="font-size:15px;line-height:1.65;color:#555;margin:0 0 10px;max-width:64ch">{{ post.excerpt }}</p>
+            <span style="font:600 11.5px 'IBM Plex Mono',monospace;color:#9c2f22;display:inline-flex;align-items:center;gap:5px">Read article <span class="post-arrow" style="display:inline-block;transition:transform .15s">→</span></span>
+          </a>
+        </sc-for>
+      </div>
+
+    </main>
+  </sc-if>
+
+  <footer style="background:#111;color:#eaeaea;padding:32px 40px;font-family:'IBM Plex Mono',monospace">
+    <div style="max-width:720px;margin:0 auto">
+      <div style="font-size:13px;line-height:1.9;color:#cfcfcf">
+        <b style="color:#fff">Email:</b> <a href="mailto:legkomedia@mm.st" style="color:#f0ded9">legkomedia@mm.st</a> &nbsp;·&nbsp;
+        <b style="color:#fff">Telegram:</b> <a href="https://t.me/legkodymov" style="color:#f0ded9">@legkodymov</a> &nbsp;·&nbsp;
+        <a href="https://t.me/anatolylegkodymov" style="color:#f0ded9">Updates channel</a>
+      </div>
+      <div style="margin-top:18px;font-size:11.5px;color:#999;border-top:1px solid #333;padding-top:16px">
+        Reproduction of this content without proper attribution is strictly prohibited.
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  // ── Add new posts here — newest first. Each post needs: slug (used in the URL, e.g. #my-post),
+  // date, tag, title, paragraphs (array of strings). linkUrl/linkLabel are optional (link out to a source).
+  // excerpt is optional — if omitted, the first paragraph is used on the list page.
+  state = {
+    activeSlug: null,
+    posts: [
+      {
+        slug: "case-closed-france-still-chasing",
+        date: "2 July 2026",
+        tag: "Commentary",
+        title: "Case Closed, but France Isn't Done Chasing",
+        paragraphs: [
+          "The case is closed, yet France is still pursuing me at its taxpayers' expense. They'd do better addressing the 77 cases of crypto kidnapping and extortion happening under their own nose.",
+          "Every country dreams of becoming the world's crypto capital — the UAE, the US, Singapore. France, it seems, has already outdone them all."
+        ],
+        linkUrl: "https://crypto.news/france-reports-77-crypto-kidnapping-and-extortion-cases-in-2026/",
+        linkLabel: "Source"
+      },
+      {
+        slug: "thank-you-for-the-magazines",
+        date: "1 July 2026",
+        tag: "Note",
+        title: "On Reading Something Other Than the News",
+        paragraphs: [
+          "Thank you to everyone who has sent me magazines and newspapers from Russia. Reading a different point of view, for once, is a breath of fresh air."
+        ]
+      },
+      {
+        slug: "grateful-for-the-chance-to-tell-my-side",
+        date: "13 February 2026",
+        tag: "Note",
+        title: "Grateful for the Chance to Tell My Side",
+        paragraphs: [
+          "Thank you for the opportunity to tell the truth, in my own words. \u201cI don't regret the time I devoted to building Bitzlato.\u201d"
+        ],
+        linkUrl: "https://www.dlnews.com/research/internal/pardon-me-a-qa-with-anatoly-legkodymov/",
+        linkLabel: "Read the feature"
+      },
+      {
+        slug: "prisoner-exchanges-russia-us",
+        date: "28 January 2026",
+        tag: "Media",
+        title: "One of Us, One of Theirs: Prisoner Exchanges Between Russia and the U.S.",
+        paragraphs: [
+          "A closer look at prisoner exchanges between Russia and the United States, including the case of a detained Russian engineer — and how the U.S. and Europe are trying to deny Russia its most valuable resource: people."
+        ],
+        linkUrl: "https://vkvideo.ru/video-20648295_456252592",
+        linkLabel: "Watch the video"
+      },
+      {
+        slug: "cz-pardon-war-not-over-for-everyone",
+        date: "23 October 2025",
+        tag: "Commentary",
+        title: "Trump Pardons Binance's CZ — the War Isn't Over for Everyone",
+        paragraphs: [
+          "\u201cPresident Trump exercised his constitutional authority by issuing a pardon for Mr. Zhao, who was prosecuted by the Biden Administration in their war on cryptocurrency,\u201d said White House Press Secretary Karoline Leavitt. \u201cThe Biden Administration's war on the crypto industry is over,\u201d she said.",
+          "Unfortunately, for some of us, that war is still very much ongoing."
+        ],
+        linkUrl: "https://www.wsj.com/finance/currencies/trump-binance-changpeng-zhao-pardon-7509bd63",
+        linkLabel: "Source"
+      },
+      {
+        slug: "p2p-deals-part-1",
+        date: "21 October 2025",
+        tag: "Analysis",
+        title: "How P2P Deals in Crypto Really Work — Part I",
+        paragraphs: [
+          "Stories about a mysterious crypto kingpin funding shadowy schemes, moving $700,000,000, make for great headlines. There isn't a word of truth in them — they're the fantasy of incompetent journalists and prosecutors.",
+          "Here's how a peer-to-peer crypto exchange actually works: you find someone selling bitcoin, send them the money, and they send bitcoin back at the agreed rate. That's it — direct interaction between two people, no intermediary holding funds.",
+          "LocalBitcoins pioneered this model in 2012, acting as a bulletin board where buyers and sellers found each other, holding coins in escrow only to prevent fraud during a trade. Trading through banks and payment systems made deals fast — often 10 to 20 minutes.",
+          "In 2018 we received our first request from Russian law enforcement. We were never going to cover illegal activity, and we had plenty of information to share: every seller in every deal provided real bank details, because without them the transfer simply isn't possible. We received nothing but positive feedback from investigators at the time.",
+          "After my arrest, media and prosecutors suddenly cried about the 'anonymity' of a service that recorded exact bank details for every deal that passed through it. It doesn't add up."
+        ]
+      },
+      {
+        slug: "extradition-legal-analysis",
+        date: "19 October 2025",
+        tag: "Analysis",
+        title: "Should Anatoly Legkodymov Be Extradited to France? A Legal Analysis",
+        paragraphs: [
+          "Anatoly Legkodymov has already served 18 months in U.S. custody and was sentenced to time served in July 2024 after pleading guilty to operating an unlicensed money-transmitting business. Despite completing that sentence, he remains detained over a French extradition request built on substantially the same conduct.",
+          "The strongest argument against extradition is ne bis in idem — the prohibition on trying someone twice for the same offense, recognized under the ICCPR, the European Convention on Human Rights, and the EU Charter of Fundamental Rights. Legal experts have described the French charges as essentially a copy-paste of the American ones.",
+          "The timing raises questions of its own: French prosecutors reportedly used the delay in his deportation proceedings to assemble fresh charges and file the extradition request — coordination that looks less like an independent French interest and more like an effort to route around the finality of the U.S. case."
+        ]
+      },
+      {
+        slug: "double-jeopardy",
+        date: "1 March 2025",
+        tag: "Update",
+        title: "Double Jeopardy",
+        paragraphs: [
+          "On July 18, 2024, Anatoly fought off all charges in a U.S. court and received the lightest possible sentence: time already served. By all accounts he should have been released immediately.",
+          "Instead he was transferred to immigration detention — a formality expected to last days. Twice a judge signed off on his deportation to Russia; twice nothing happened, the process stalled in bureaucratic delay.",
+          "That delay had a purpose: French prosecutors were using the time to assemble new charges, essentially a copy of the American ones, and file an extradition request. Punishing a man twice for the same conduct violates the most basic principles of justice."
+        ]
+      },
+      {
+        slug: "bitzlato-aftermath",
+        date: "19 December 2024",
+        tag: "Update",
+        title: "On Bitzlato's Aftermath",
+        paragraphs: [
+          "Never in my worst nightmare did I imagine that half the company would spend two years behind bars fighting baseless charges — while the executives who remain free aren't focused on rebuilding the company's reputation, but on picking Bitzlato apart piece by piece to build new ventures on its wreckage."
+        ],
+        linkUrl: "https://t.me/BZ_support/9",
+        linkLabel: "Source"
+      },
+      {
+        slug: "ethereum-lead-dev-lost",
+        date: "6 December 2024",
+        tag: "Commentary",
+        title: "Ethereum's Lead Dev Is Lost. Are You Any Closer to Figuring It Out?",
+        paragraphs: [
+          "News trickles down slowly here. I only recently learned that Ethereum's development lead publicly likened the crypto space to a giant casino. No kidding.",
+          "The broader narrative around crypto keeps clouding why Bitcoin was created in the first place — as a response to currencies that governments have always devalued. If you want more of that kind of thinking, my recommended reading list has plenty."
+        ],
+        linkUrl: "Library.dc.html",
+        linkLabel: "See the Library"
+      },
+      {
+        slug: "pardon-people-not-poultry",
+        date: "27 November 2024",
+        tag: "Open Letter",
+        title: "Pardon People Not Poultry",
+        paragraphs: [
+          "Dear Mr. President — these individuals have gained valuable insight through their legal proceedings, in an industry where clear business regulations have yet to be established. They are ready to contribute to society right now. Please grant them clemency:",
+          "Virgil Griffith · Roman Sterligov · Ian Freeman · Roman Storm · Samuel Bankman-Fried and the FTX team · Alexey Andryunin (GotBit) · Dmitry Vasiliev (Wex, detained in Poland)",
+          "#PardonPeopleNotPoultry"
+        ]
+      },
+      {
+        slug: "black-hole-of-american-justice",
+        date: "21 November 2024",
+        tag: "Update",
+        title: "The Black Hole of American Justice",
+        paragraphs: [
+          "More than four months ago I was released from the courtroom as a free man. That freedom didn't last a second — since July 19 I've been in immigration detention, and the FBI 'accidentally' lost my passport.",
+          "Twice a judge approved my voluntary departure from the U.S. Each time, the Department of Homeland Security moved to block it — first citing a French arrest warrant, then filing its own appeal — pushing the case into limbo before an appellate board with no deadline in sight.",
+          "Immigration and criminal prisons in the U.S. are commercial entities traded on the stock market. Documents are lost often, and people routinely wait months even from cooperative countries. Shares of the private prison company holding me have doubled in value over the past month."
+        ]
+      },
+      {
+        slug: "they-are-after-all-of-you",
+        date: "14 November 2024",
+        tag: "Commentary",
+        title: "They Are After All of You",
+        paragraphs: [
+          "U.S. regulators have reported 50,000 open cases involving companies linked to money transfers, including crypto platforms. That number will only grow. Against a backdrop of over 2 million incarcerated people in the U.S., there's room in American prisons for everyone."
+        ]
+      },
+      {
+        slug: "media-coverage-and-case-materials",
+        date: "1 November 2024",
+        tag: "Statement",
+        title: "On Media Coverage and Case Materials",
+        paragraphs: [
+          "A multitude of outlets have published inaccurate information about me and my case — figures and phrases taken out of context, crafted for sensational headlines, without documentary evidence and without a single journalist fact-checking the claims.",
+          "My legal team has done an immense amount of work, and I intend to make all case materials public. Legal documents are the primary source of truth here — a sentencing memorandum, including an independent crypto expert's audit of the company's activities, is already published on this site, with more to come."
+        ],
+        linkUrl: "Documents.dc.html",
+        linkLabel: "View court documents"
+      },
+      {
+        slug: "first-statement-since-release",
+        date: "17 October 2024",
+        tag: "Statement",
+        title: "First Statement Since Release",
+        paragraphs: [
+          "The investigation is over and I'm waiting to be sent home — or to France. I'm still limited in communication, so my picture of events is fragmented. Living almost two years without internet access, in the world of IT and crypto, is its own kind of disaster.",
+          "I've had no involvement in whatever the company has done these past two years, and no connection to ventures being promoted on Bitzlato's old channels. When I was arrested, all company assets passed to the remaining founders and employees, except funds seized by French authorities — I have no remaining material assets.",
+          "Six months before my arrest I wanted to shut the company down; I had already stepped away as a founder of Bitzlato Ltd. Hong Kong. I wish the current management success in winding it down and paying out remaining funds — from what I understand, users who filed claims within nine months were compensated in full."
+        ]
+      }
+    ]
+  };
+
+  componentDidMount() {
+    this.syncFromHash();
+    this._onHashChange = () => this.syncFromHash();
+    window.addEventListener("hashchange", this._onHashChange);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("hashchange", this._onHashChange);
+  }
+  syncFromHash() {
+    const slug = decodeURIComponent((location.hash || "").replace(/^#/, ""));
+    this.setState({ activeSlug: slug || null });
+  }
+
+  renderVals() {
+    const posts = this.state.posts.map(p => ({
+      ...p,
+      href: "#" + p.slug,
+      excerpt: p.excerpt || (p.paragraphs[0].length > 150 ? p.paragraphs[0].slice(0, 150).trim() + "…" : p.paragraphs[0])
+    }));
+    const activePost = posts.find(p => p.slug === this.state.activeSlug) || null;
+    return {
+      posts,
+      activePost,
+      hasActive: !!activePost,
+      showList: !activePost
+    };
+  }
+}
+
+</script>
+</body>
+</html>
