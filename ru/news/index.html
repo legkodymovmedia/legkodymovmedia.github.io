@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<script src="../../support.js"></script>
 </head>
 <body>
 <x-dc>
@@ -23,20 +23,20 @@
 <div style="background:#fff;color:#111;font-family:'Newsreader',serif;min-height:100vh;display:flex;flex-direction:column">
 
   <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 40px;border-bottom:2px solid #111">
-    <a href="Home.ru.dc.html" style="font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:#111;letter-spacing:.01em">Легкодымов</a>
+    <a href="/ru/" style="font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:#111;letter-spacing:.01em">Легкодымов</a>
     <div style="display:flex;gap:8px;font:600 12px 'IBM Plex Mono',monospace">
-      <a href="News.ru.dc.html" style="padding:3px 8px;background:#111;color:#fff">RU</a>
-      <a href="News.dc.html" style="padding:3px 8px;color:#666">EN</a>
+      <a href="/ru/news/" style="padding:3px 8px;background:#111;color:#fff">RU</a>
+      <a href="/news/" style="padding:3px 8px;color:#666">EN</a>
     </div>
   </div>
 
   <nav style="display:flex;gap:26px;padding:14px 40px;border-bottom:1px solid #ddd;font:600 12px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.05em;color:#555">
-    <a href="Home.ru.dc.html" style="color:#555">Главная</a>
-    <a href="News.ru.dc.html" style="color:#111;border-bottom:2px solid #9c2f22;padding-bottom:2px">Новости</a>
-    <a href="Media.ru.dc.html" style="color:#555">СМИ</a>
-    <a href="Documents.ru.dc.html" style="color:#555">Документы суда</a>
-    <a href="Library.ru.dc.html" style="color:#555">Библиотека</a>
-    <a href="Contacts.ru.dc.html" style="color:#555">Контакты</a>
+    <a href="/ru/" style="color:#555">Главная</a>
+    <a href="/ru/news/" style="color:#111;border-bottom:2px solid #9c2f22;padding-bottom:2px">Новости</a>
+    <a href="/ru/media/" style="color:#555">СМИ</a>
+    <a href="/ru/documents/" style="color:#555">Документы суда</a>
+    <a href="/ru/library/" style="color:#555">Библиотека</a>
+    <a href="/ru/contacts/" style="color:#555">Контакты</a>
   </nav>
 
   <sc-if value="{{ hasActive }}" hint-placeholder-val="{{ false }}">
@@ -217,7 +217,7 @@ class Component extends DCLogic {
           "Новости доходят до меня медленно. Я только недавно узнал, что ведущий разработчик Ethereum публично сравнил крипто-индустрию с огромным казино. Неудивительно.",
           "Общий нарратив вокруг крипты постоянно затуманивает то, зачем вообще был создан биткоин — как ответ на валюты, которые государства всегда обесценивали. Если хотите больше подобных размышлений — в моём списке рекомендаций есть что почитать."
         ],
-        linkUrl: "Library.ru.dc.html",
+        linkUrl: "/ru/library/",
         linkLabel: "Смотреть библиотеку"
       },
       {
@@ -260,7 +260,7 @@ class Component extends DCLogic {
           "Множество изданий опубликовали недостоверную информацию обо мне и моём деле — цифры и фразы, вырванные из контекста ради громких заголовков, без документальных подтверждений и без единой проверки фактов.",
           "Моя команда юристов проделала огромную работу, и я намерен сделать все материалы дела публичными. Юридические документы — главный источник истины: меморандум о назначении наказания, включая независимую экспертную оценку деятельности компании, уже опубликован на сайте, и это только начало."
         ],
-        linkUrl: "Documents.ru.dc.html",
+        linkUrl: "/ru/documents/",
         linkLabel: "Смотреть документы суда"
       },
       {

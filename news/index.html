@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<script src="../support.js"></script>
 </head>
 <body>
 <x-dc>
@@ -23,20 +23,20 @@
 <div style="background:#fff;color:#111;font-family:'Newsreader',serif;min-height:100vh;display:flex;flex-direction:column">
 
   <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 40px;border-bottom:2px solid #111">
-    <a href="index.html" style="font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:#111;letter-spacing:.01em">Legkodymov</a>
+    <a href="/" style="font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:#111;letter-spacing:.01em">Legkodymov</a>
     <div style="display:flex;gap:8px;font:600 12px 'IBM Plex Mono',monospace">
-      <a href="News.ru.dc.html" style="padding:3px 8px;color:#666">RU</a>
-      <a href="News.dc.html" style="padding:3px 8px;background:#111;color:#fff">EN</a>
+      <a href="/ru/news/" style="padding:3px 8px;color:#666">RU</a>
+      <a href="/news/" style="padding:3px 8px;background:#111;color:#fff">EN</a>
     </div>
   </div>
 
   <nav style="display:flex;gap:26px;padding:14px 40px;border-bottom:1px solid #ddd;font:600 12px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.05em;color:#555">
-    <a href="index.html" style="color:#555">Home</a>
-    <a href="News.dc.html" style="color:#111;border-bottom:2px solid #9c2f22;padding-bottom:2px">News</a>
-    <a href="Media.dc.html" style="color:#555">Media</a>
-    <a href="Documents.dc.html" style="color:#555">Court Documents</a>
-    <a href="Library.dc.html" style="color:#555">Anatoly's Library</a>
-    <a href="Contacts.dc.html" style="color:#555">Contacts</a>
+    <a href="/" style="color:#555">Home</a>
+    <a href="/news/" style="color:#111;border-bottom:2px solid #9c2f22;padding-bottom:2px">News</a>
+    <a href="/media/" style="color:#555">Media</a>
+    <a href="/documents/" style="color:#555">Court Documents</a>
+    <a href="/library/" style="color:#555">Anatoly's Library</a>
+    <a href="/contacts/" style="color:#555">Contacts</a>
   </nav>
 
   <sc-if value="{{ hasActive }}" hint-placeholder-val="{{ false }}">
@@ -217,7 +217,7 @@ class Component extends DCLogic {
           "News trickles down slowly here. I only recently learned that Ethereum's development lead publicly likened the crypto space to a giant casino. No kidding.",
           "The broader narrative around crypto keeps clouding why Bitcoin was created in the first place — as a response to currencies that governments have always devalued. If you want more of that kind of thinking, my recommended reading list has plenty."
         ],
-        linkUrl: "Library.dc.html",
+        linkUrl: "/library/",
         linkLabel: "See the Library"
       },
       {
@@ -260,7 +260,7 @@ class Component extends DCLogic {
           "A multitude of outlets have published inaccurate information about me and my case — figures and phrases taken out of context, crafted for sensational headlines, without documentary evidence and without a single journalist fact-checking the claims.",
           "My legal team has done an immense amount of work, and I intend to make all case materials public. Legal documents are the primary source of truth here — a sentencing memorandum, including an independent crypto expert's audit of the company's activities, is already published on this site, with more to come."
         ],
-        linkUrl: "Documents.dc.html",
+        linkUrl: "/documents/",
         linkLabel: "View court documents"
       },
       {
