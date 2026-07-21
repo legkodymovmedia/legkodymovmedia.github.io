@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110917422', 'ym');
+
+    ym(110917422, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/110917422" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<script src="../../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Noto+Sans+SC:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  body{margin:0}
+  a{color:#9c2f22;text-decoration:none}
+  a:hover{text-decoration:underline}
+  ::selection{background:#111;color:#fff}
+  .post-row:hover .post-title{color:#9c2f22}
+  .post-row:hover .post-arrow{transform:translateX(3px)}
+</style>
+</helmet>
+
+<div style="background:#fff;color:#111;font-family:'Noto Sans SC',sans-serif;min-height:100vh;display:flex;flex-direction:column">
+
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 40px;border-bottom:2px solid #111">
+    <a href="/zh/" style="font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:#111;letter-spacing:.01em">Legkodymov</a>
+    <div style="display:flex;gap:8px;font:600 12px 'IBM Plex Mono',monospace">
+      <a href="/ru/news/" style="padding:3px 8px;color:#666">RU</a>
+      <a href="/news/" style="padding:3px 8px;color:#666">EN</a>
+      <a href="/fr/news/" style="padding:3px 8px;color:#666">FR</a>
+      <a href="/zh/news/" style="padding:3px 8px;background:#111;color:#fff">ZH</a>
+    </div>
+  </div>
+
+  <nav style="display:flex;gap:26px;padding:14px 40px;border-bottom:1px solid #ddd;font:600 12px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.05em;color:#555">
+    <a href="/zh/" style="color:#555">首页</a>
+    <a href="/zh/news/" style="color:#111;border-bottom:2px solid #9c2f22;padding-bottom:2px">新闻</a>
+    <a href="/zh/media/" style="color:#555">媒体</a>
+    <a href="/zh/documents/" style="color:#555">法庭文件</a>
+    <a href="/zh/library/" style="color:#555">阿纳托利的书单</a>
+    <a href="/zh/contacts/" style="color:#555">联系方式</a>
+  </nav>
+
+  <sc-if value="{{ hasActive }}" hint-placeholder-val="{{ false }}">
+    <main style="flex:1;max-width:680px;margin:0 auto;padding:48px 32px 90px;width:100%;box-sizing:border-box">
+      <a href="#" style="font:600 11.5px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.05em;color:#888;display:inline-block;margin-bottom:28px">← 返回全部文章</a>
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px">
+        <span style="font:600 10.5px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.06em;color:#9c2f22;background:#faeeec;padding:3px 9px;border-radius:2px">{{ activePost.tag }}</span>
+        <span style="font:500 12px 'IBM Plex Mono',monospace;color:#888">{{ activePost.date }}</span>
+      </div>
+      <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:32px;line-height:1.3;margin:0 0 26px;color:#111">{{ activePost.title }}</h1>
+      <div style="font-size:17px;line-height:1.9;color:#222">
+        <sc-for list="{{ activePost.paragraphs }}" as="para" hint-placeholder-count="3">
+          <p style="margin:0 0 18px">{{ para }}</p>
+        </sc-for>
+      </div>
+      <sc-if value="{{ activePost.linkUrl }}" hint-placeholder-val="{{ false }}">
+        <a href="{{ activePost.linkUrl }}" style="font:600 12px 'IBM Plex Mono',monospace;display:inline-block;margin-top:8px">{{ activePost.linkLabel }} →</a>
+      </sc-if>
+      <div style="margin-top:56px;padding-top:24px;border-top:1px solid #e4e4e4">
+        <a href="#" style="font:600 12px 'IBM Plex Mono',monospace;color:#111">← 返回全部文章</a>
+      </div>
+    </main>
+  </sc-if>
+
+  <sc-if value="{{ showList }}" hint-placeholder-val="{{ true }}">
+    <main style="flex:1;max-width:720px;margin:0 auto;padding:48px 32px 80px;width:100%;box-sizing:border-box">
+      <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:32px;margin:0 0 8px">新闻</h1>
+      <p style="color:#666;font-size:14px;margin:0 0 44px">阿纳托利的最新动态与声明,随事件发布。</p>
+
+      <div>
+        <sc-for list="{{posts}}" as="post" hint-placeholder-count="5">
+          <a class="post-row" href="{{ post.href }}" style="display:block;padding:26px 0;border-top:1px solid #e4e4e4;text-decoration:none;color:inherit">
+            <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">
+              <span style="font:600 10.5px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.06em;color:#9c2f22;background:#faeeec;padding:3px 9px;border-radius:2px">{{ post.tag }}</span>
+              <span style="font:500 12px 'IBM Plex Mono',monospace;color:#888">{{ post.date }}</span>
+            </div>
+            <h2 class="post-title" style="font-family:'Fraunces',serif;font-weight:600;font-size:21px;line-height:1.4;margin:0 0 10px;color:#111;transition:color .15s">{{ post.title }}</h2>
+            <p style="font-size:15px;line-height:1.75;color:#555;margin:0 0 10px;max-width:64ch">{{ post.excerpt }}</p>
+            <span style="font:600 11.5px 'IBM Plex Mono',monospace;color:#9c2f22;display:inline-flex;align-items:center;gap:5px">阅读全文 <span class="post-arrow" style="display:inline-block;transition:transform .15s">→</span></span>
+          </a>
+        </sc-for>
+      </div>
+
+    </main>
+  </sc-if>
+
+  <footer style="background:#111;color:#eaeaea;padding:32px 40px;font-family:'IBM Plex Mono',monospace">
+    <div style="max-width:720px;margin:0 auto">
+      <div style="font-size:13px;line-height:1.9;color:#cfcfcf;font-family:'Noto Sans SC',sans-serif">
+        <b style="color:#fff">邮箱:</b> <a href="mailto:legkomedia@mm.st" style="color:#f0ded9">legkomedia@mm.st</a> &nbsp;·&nbsp;
+        <b style="color:#fff">Telegram:</b> <a href="https://t.me/legkodymov" style="color:#f0ded9">@legkodymov</a> &nbsp;·&nbsp;
+        <a href="https://t.me/anatolylegkodymov" style="color:#f0ded9">更新频道</a>
+      </div>
+      <div style="margin-top:18px;font-size:11.5px;color:#999;border-top:1px solid #333;padding-top:16px;font-family:'Noto Sans SC',sans-serif">
+        未经适当署名,严禁转载本内容。
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    activeSlug: null,
+    posts: [
+      {
+        slug: "radio-in-an-american-prison",
+        date: "2026年7月21日",
+        tag: "随笔",
+        title: "美国监狱里的收音机:每小时四分钟的自由",
+        paragraphs: [
+          "很多人问我,被法国方面关押期间都在做些什么。分享一点日常生活。",
+          "在美国的一些联邦监狱里,囚犯被允许使用收音机。这是一项相当不寻常的特权。不过选择不多——大约有十五个电台可收听,但即便如此也是一点小小的慰藉,能帮助打发单调的狱中日子。",
+          "我最喜欢的电台是 Coast to Coast AM。这大概是我在美国广播里唯一真正能听下去的节目。政治和宣传内容很少。主持人邀请的嘉宾包括知名医生、科学家、心理学家和经济学家——都是聪明有趣、值得一听的人。",
+          "节目话题五花八门:从大脚怪、UFO、所谓的机密信息披露,到各种预言、神秘现象以及长寿话题。即便撇开那些神秘学和占卜内容,仍有不少内容扎实的节目,值得我在获释后继续收听。",
+          "比如最近7月4日播出的一期节目,讨论了延长人类寿命的话题。两位年轻人介绍了他们拍摄的纪录片《Forever Young》。可惜我只能等回家后才能看到。",
+          "这档节目平均约有四百万听众。能感觉到主持人做了充分准备,受邀嘉宾也几乎总是真正有意思的人物。节目已经播出三十年,水准没有下降——这一点值得尊敬。",
+          "在监禁的环境下,这类节目已经超越了普通背景音的意义。它是难得的机会,能听到来自外部世界的声音,学到新东西,哪怕只是暂时,也能感受到自由。"
+        ]
+      },
+      {
+        slug: "case-closed-france-still-chasing",
+        date: "2026年7月2日",
+        tag: "评论",
+        title: "案件已经结案,但法国仍在花纳税人的钱继续追捕我",
+        paragraphs: [
+          "案件已经结案,但法国仍在花纳税人的钱继续追捕我。他们不如去处理一下自己国内发生的那77起加密货币绑架和抢劫案件。",
+          "每个国家都梦想成为世界加密货币之都(阿联酋、美国、新加坡)。但看起来,法国已经把它们都比下去了。"
+        ],
+        linkUrl: "https://crypto.news/france-reports-77-crypto-kidnapping-and-extortion-cases-in-2026/",
+        linkLabel: "来源"
+      },
+      {
+        slug: "thank-you-for-the-magazines",
+        date: "2026年7月1日",
+        tag: "随笔",
+        title: "读点新闻之外的东西",
+        paragraphs: [
+          "感谢所有从俄罗斯给我寄来杂志和报纸的人。难得读到不同的观点,这确实是一股新鲜空气。"
+        ]
+      },
+      {
+        slug: "grateful-for-the-chance-to-tell-my-side",
+        date: "2026年2月13日",
+        tag: "随笔",
+        title: "感谢有机会讲述我自己的故事",
+        paragraphs: [
+          "感谢这次能用自己的话讲出真相的机会。“我不后悔当初投入心血打造 Bitzlato 的那段时间。”"
+        ],
+        linkUrl: "https://www.dlnews.com/research/internal/pardon-me-a-qa-with-anatoly-legkodymov/",
+        linkLabel: "阅读报道"
+      },
+      {
+        slug: "prisoner-exchanges-russia-us",
+        date: "2026年1月28日",
+        tag: "媒体",
+        title: "自己人换自己人:俄美之间的换囚",
+        paragraphs: [
+          "深入探讨俄罗斯与美国之间的换囚案例,包括一名被拘留的俄罗斯工程师的遭遇——以及美国和欧洲如何试图剥夺俄罗斯最宝贵的资源:人。"
+        ],
+        linkUrl: "https://vkvideo.ru/video-20648295_456252592",
+        linkLabel: "观看视频"
+      },
+      {
+        slug: "cz-pardon-war-not-over-for-everyone",
+        date: "2025年10月23日",
+        tag: "评论",
+        title: "特朗普赦免币安赵长鹏——但对某些人来说战争还没结束",
+        paragraphs: [
+          "白宫新闻发言人卡罗琳·莱维特表示:“特朗普总统行使宪法赋予的权力,赦免了赵先生,他此前遭到拜登政府在其对加密货币发动的战争中起诉。”她还表示:“拜登政府对加密行业发动的战争已经结束。”",
+          "但遗憾的是,对我们中的一些人来说,这场战争仍在继续。"
+        ],
+        linkUrl: "https://www.wsj.com/finance/currencies/trump-binance-changpeng-zhao-pardon-7509bd63",
+        linkLabel: "来源"
+      },
+      {
+        slug: "p2p-deals-part-1",
+        date: "2025年10月21日",
+        tag: "分析",
+        title: "加密货币的P2P交易到底是怎么回事——第一部分",
+        paragraphs: [
+          "关于一个神秘加密大亨资助暗中操作、转移7亿美元的故事,标题确实很抓眼球。但这里面没有一个字是真的——这不过是无能的记者和检察官的臆想。",
+          "点对点加密货币交易实际上是这样运作的:你找到一个卖比特币的人,把钱汇给他,他按约定汇率把比特币发给你。仅此而已——两个人之间的直接交易,没有中间人代持资金。",
+          "LocalBitcoins 在2012年率先采用这种模式,充当买卖双方相互寻找的公告板,只在交易过程中为防止欺诈而暂时托管代币。通过银行和支付系统完成交易,速度很快——通常10到20分钟就能完成。",
+          "2018年,我们收到了俄罗斯执法部门的第一次请求。我们从未打算包庇非法活动,而且我们掌握着充分的信息可以分享:每笔交易中的每位卖家都提供了真实的银行信息,因为没有这些信息,转账根本无法完成。当时我们只收到了调查人员的正面反馈。",
+          "在我被捕后,媒体和检察官突然开始大谈这个服务的“匿名性”——而这个服务恰恰为每一笔交易都记录了精确的银行信息。这根本说不通。"
+        ]
+      },
+      {
+        slug: "extradition-legal-analysis",
+        date: "2025年10月19日",
+        tag: "分析",
+        title: "阿纳托利·列格科德莫夫应该被引渡到法国吗?一份法律分析",
+        paragraphs: [
+          "阿纳托利·列格科德莫夫已在美国被羁押18个月,并于2024年7月因认罪经营无牌照货币转账业务而被判处已服刑期。尽管刑期已经履行完毕,他仍因法国提出的、基本基于相同事实的引渡请求而被继续羁押。",
+          "反对引渡最有力的论点是“一事不再理”原则——禁止就同一罪行对一人进行两次审判,这一原则受到《公民权利和政治权利国际公约》、《欧洲人权公约》以及《欧盟基本权利宪章》的承认。法律专家称,法国的指控实质上是美国指控的“复制粘贴”。",
+          "案件的时间线也令人生疑:据报道,法国检方利用他驱逐程序中的拖延时间来组织新的指控并提出引渡请求——这种协调看起来不像是法国方面独立的利益诉求,更像是试图绕开美国案件已定局面的做法。"
+        ]
+      },
+      {
+        slug: "double-jeopardy",
+        date: "2025年3月1日",
+        tag: "更新",
+        title: "同一案件的双重惩罚",
+        paragraphs: [
+          "2024年7月18日,阿纳托利在美国法庭上驳回了所有指控,获得了最轻的判决——已服刑期。按理说,他本应立即获释。",
+          "然而,他却被转往移民拘留所——这本应只是持续几天的手续。法官两次批准将他遣返俄罗斯;但两次都未能执行,程序陷入官僚拖延。",
+          "这一拖延是有目的的:法国检方利用这段时间组织新的指控——本质上是美国指控的翻版——并提出引渡请求。就同一行为对一个人施加两次惩罚,违反了最基本的司法原则。"
+        ]
+      },
+      {
+        slug: "bitzlato-aftermath",
+        date: "2024年12月19日",
+        tag: "更新",
+        title: "关于 Bitzlato 事件后续",
+        paragraphs: [
+          "我做梦也没想到,公司里一半的人会因毫无根据的指控在狱中度过两年——而那些仍然自由的高管们,并没有致力于重建公司声誉,而是在把 Bitzlato 一点点拆解,借助其残骸建立新的项目。"
+        ],
+        linkUrl: "https://t.me/BZ_support/9",
+        linkLabel: "来源"
+      },
+      {
+        slug: "ethereum-lead-dev-lost",
+        date: "2024年12月6日",
+        tag: "评论",
+        title: "以太坊首席开发者也迷失了方向。你搞清楚了吗?",
+        paragraphs: [
+          "这里的新闻传得很慢。我最近才知道,以太坊的开发负责人公开将整个加密行业比作一个巨大的赌场。这一点也不奇怪。",
+          "围绕加密货币的主流叙事,一直在模糊比特币最初被创造出来的原因——作为对政府一贯贬值的货币的回应。如果你想了解更多这类思考,我的推荐书单里还有很多。"
+        ],
+        linkUrl: "/zh/library/",
+        linkLabel: "查看书单"
+      },
+      {
+        slug: "pardon-people-not-poultry",
+        date: "2024年11月27日",
+        tag: "公开信",
+        title: "赦免人,而不是火鸡",
+        paragraphs: [
+          "尊敬的总统先生——这些人通过司法程序获得了宝贵的经验,而这个行业至今尚未建立清晰的商业监管规则。他们已准备好立刻为社会做出贡献。请给予他们赦免:",
+          "维吉尔·格里菲斯(Virgil Griffith) · 罗曼·斯特利戈夫(Roman Sterligov) · 伊恩·弗里曼(Ian Freeman) · 罗曼·斯托姆(Roman Storm) · 萨姆·班克曼-弗里德(Samuel Bankman-Fried)及FTX团队 · 阿列克谢·安德留宁(GotBit) · 德米特里·瓦西里耶夫(WEX,被拘留于波兰)",
+          "#PardonPeopleNotPoultry"
+        ]
+      },
+      {
+        slug: "black-hole-of-american-justice",
+        date: "2024年11月21日",
+        tag: "更新",
+        title: "美国司法的黑洞",
+        paragraphs: [
+          "四个多月前,我作为自由人走出法庭。但这份自由没能维持一秒钟——自7月19日起,我一直被关在移民拘留所,联邦调查局“不小心”弄丢了我的护照。",
+          "法官两次批准我自愿离开美国。但每一次,国土安全部都出面阻止——先是以法国的逮捕令为由,接着又提起自己的上诉——把案件拖入一个没有明确期限的上诉委员会审理的僵局。",
+          "美国的移民拘留所和刑事监狱都是在股票市场上交易的商业实体。文件常常丢失,即便来自友好国家的人也经常要等上数月。关押我的私营监狱公司的股票,上个月市值翻了一番。"
+        ]
+      },
+      {
+        slug: "they-are-after-all-of-you",
+        date: "2024年11月14日",
+        tag: "评论",
+        title: "他们盯上的是你们所有人",
+        paragraphs: [
+          "美国监管机构报告称,涉及资金转账相关公司(包括加密平台)的未结案件多达5万起。这个数字只会继续增长。在美国监狱关押人数超过200万的背景下,美国的监狱里给所有人都留有位置。"
+        ]
+      },
+      {
+        slug: "media-coverage-and-case-materials",
+        date: "2024年11月1日",
+        tag: "声明",
+        title: "关于媒体报道与案件材料",
+        paragraphs: [
+          "众多媒体发布了关于我和我的案件的不实信息——数字和语句被断章取义,专为制造耸动标题而炮制,既无文件证据,也没有一个记者去核实事实。",
+          "我的法律团队付出了巨大的努力,我打算将所有案件材料公之于众。法律文件是这里最主要的真相来源——一份量刑备忘录,包括一位独立加密专家对公司活动的审计报告,已在本网站发布,后续还会有更多。"
+        ],
+        linkUrl: "/zh/documents/",
+        linkLabel: "查看法庭文件"
+      },
+      {
+        slug: "first-statement-since-release",
+        date: "2024年10月17日",
+        tag: "声明",
+        title: "获释后的第一份声明",
+        paragraphs: [
+          "调查已经结束,我正在等待被遣返回家——或者被送往法国。我在通讯方面仍受到限制,因此对事态的了解是零碎的。在IT和加密的世界里,近两年没有互联网接入,本身就是一场灾难。",
+          "过去两年公司所做的任何事情,我都没有参与,也与Bitzlato旧频道上推广的项目毫无关系。我被捕时,公司的全部资产都转给了留下的创始人和员工,除了被法国当局扣押的资金——我已没有任何剩余的物质资产。",
+          "在被捕前六个月,我就想关闭公司——我早已退出Bitzlato Ltd. Hong Kong创始人的身份。我祝愿现任管理层能顺利完成公司清算并支付剩余资金——据我所知,在九个月内提出申请的用户都已获得全额赔偿。"
+        ]
+      }
+    ]
+  };
+
+  componentDidMount() {
+    this.syncFromHash();
+    this._onHashChange = () => this.syncFromHash();
+    window.addEventListener("hashchange", this._onHashChange);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("hashchange", this._onHashChange);
+  }
+  syncFromHash() {
+    const slug = decodeURIComponent((location.hash || "").replace(/^#/, ""));
+    this.setState({ activeSlug: slug || null });
+  }
+
+  renderVals() {
+    const posts = this.state.posts.map(p => ({
+      ...p,
+      href: "#" + p.slug,
+      excerpt: p.excerpt || (p.paragraphs[0].length > 70 ? p.paragraphs[0].slice(0, 70).trim() + "…" : p.paragraphs[0])
+    }));
+    const activePost = posts.find(p => p.slug === this.state.activeSlug) || null;
+    return {
+      posts,
+      activePost,
+      hasActive: !!activePost,
+      showList: !activePost
+    };
+  }
+}
+</script>
+</body>
+</html>

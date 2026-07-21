@@ -17,13 +17,13 @@
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/110917422" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
-<script src="../support.js"></script>
+<script src="../../support.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet data-dc-atomics>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Noto+Sans+SC:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   body{margin:0}
   a{color:#9c2f22;text-decoration:none}
@@ -31,31 +31,31 @@
 </style>
 </helmet>
 
-<div style="background:#fff;color:#111;font-family:'Newsreader',serif;min-height:100vh;display:flex;flex-direction:column">
+<div style="background:#fff;color:#111;font-family:'Noto Sans SC',sans-serif;min-height:100vh;display:flex;flex-direction:column">
 
   <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 40px;border-bottom:2px solid #111">
-    <a href="/" style="font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:#111;letter-spacing:.01em">Legkodymov</a>
+    <a href="/zh/" style="font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:#111;letter-spacing:.01em">Legkodymov</a>
     <div style="display:flex;gap:8px;font:600 12px 'IBM Plex Mono',monospace">
       <a href="/ru/documents/" style="padding:3px 8px;color:#666">RU</a>
-      <a href="/documents/" style="padding:3px 8px;background:#111;color:#fff">EN</a>
+      <a href="/documents/" style="padding:3px 8px;color:#666">EN</a>
       <a href="/fr/documents/" style="padding:3px 8px;color:#666">FR</a>
-    <a href="/zh/documents/" style="padding:3px 8px;color:#666">ZH</a>
+      <a href="/zh/documents/" style="padding:3px 8px;background:#111;color:#fff">ZH</a>
     </div>
   </div>
 
   <nav style="display:flex;gap:26px;padding:14px 40px;border-bottom:1px solid #ddd;font:600 12px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.05em;color:#555">
-    <a href="/" style="color:#555">Home</a>
-    <a href="/news/" style="color:#555">News</a>
-    <a href="/media/" style="color:#555">Media</a>
-    <a href="/documents/" style="color:#111;border-bottom:2px solid #9c2f22;padding-bottom:2px">Court Documents</a>
-    <a href="/library/" style="color:#555">Anatoly's Library</a>
-    <a href="/contacts/" style="color:#555">Contacts</a>
+    <a href="/zh/" style="color:#555">首页</a>
+    <a href="/zh/news/" style="color:#555">新闻</a>
+    <a href="/zh/media/" style="color:#555">媒体</a>
+    <a href="/zh/documents/" style="color:#111;border-bottom:2px solid #9c2f22;padding-bottom:2px">法庭文件</a>
+    <a href="/zh/library/" style="color:#555">阿纳托利的书单</a>
+    <a href="/zh/contacts/" style="color:#555">联系方式</a>
   </nav>
 
   <main style="flex:1;max-width:760px;margin:0 auto;padding:48px 32px 80px;width:100%;box-sizing:border-box">
-    <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:34px;margin:0 0 8px">Court Documents</h1>
-    <p style="color:#666;font-size:14px;margin:0 0 8px;max-width:56ch">Legal documents are the primary source of truth. Case filings, rulings and expert reports are published here as they become available.</p>
-    <p style="color:#9c2f22;font-size:12.5px;font-family:'IBM Plex Mono',monospace;margin:0 0 40px">To add a document: drop the PDF in /documents and add one row below with its title, date, category and file path.</p>
+    <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:32px;margin:0 0 8px">法庭文件</h1>
+    <p style="color:#666;font-size:14px;margin:0 0 8px;max-width:56ch">法律文件是最主要的真相来源。案卷材料、判决书和专家报告将在可获得后陆续发布于此。</p>
+    <p style="color:#9c2f22;font-size:12.5px;font-family:'IBM Plex Mono',monospace;margin:0 0 40px">如需添加文件:将PDF放入 /documents 目录,并在下方添加一行,注明标题、日期、类别和文件路径。</p>
 
     <sc-for list="{{ documents }}" as="doc" hint-placeholder-count="3">
       <a href="{{ doc.file }}" style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid #e4e4e4;text-decoration:none;color:inherit">
@@ -71,12 +71,12 @@
 
   <footer style="background:#111;color:#eaeaea;padding:32px 40px;font-family:'IBM Plex Mono',monospace">
     <div style="max-width:760px;margin:0 auto">
-      <div style="font-size:13px;line-height:1.9;color:#cfcfcf">
-        <b style="color:#fff">Email:</b> <a href="mailto:legkomedia@mm.st" style="color:#f0ded9">legkomedia@mm.st</a> &nbsp;·&nbsp;
+      <div style="font-size:13px;line-height:1.9;color:#cfcfcf;font-family:'Noto Sans SC',sans-serif">
+        <b style="color:#fff">邮箱:</b> <a href="mailto:legkomedia@mm.st" style="color:#f0ded9">legkomedia@mm.st</a> &nbsp;·&nbsp;
         <b style="color:#fff">Telegram:</b> <a href="https://t.me/legkodymov" style="color:#f0ded9">@legkodymov</a>
       </div>
-      <div style="margin-top:18px;font-size:11.5px;color:#999;border-top:1px solid #333;padding-top:16px">
-        Reproduction of this content without proper attribution is strictly prohibited.
+      <div style="margin-top:18px;font-size:11.5px;color:#999;border-top:1px solid #333;padding-top:16px;font-family:'Noto Sans SC',sans-serif">
+        未经适当署名,严禁转载本内容。
       </div>
     </div>
   </footer>
@@ -86,20 +86,15 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  // ── Add new documents here. `file` should point at a PDF you've placed in the project
-  // (e.g. "documents/sentencing-memo.pdf"). Placeholder paths below until real files are uploaded.
   state = {
     documents: [
-      { date: "18 Jul 2024", category: "Sentencing", title: "Sentencing Memorandum", file: "https://raw.githubusercontent.com/legkodymovmedia/legkodymovmedia.github.io/main/resources/2024-07-18%20Sentencing%20USA%20v.%20LEGKODYMOV%20-%2023-CR-496(ENV)%20(1)(1).pdf" },
-      { date: "23 Jul 2024", category: "Expert Report", title: "Independent Crypto Expert Report — Audit of Company Activities", file: "https://raw.githubusercontent.com/legkodymovmedia/legkodymovmedia.github.io/main/resources/2024-07-23%20Audit%20report%20eng.pdf" },
-      { date: "23 Jul 2024", category: "Sentencing", title: "Redacted Sentencing Reply (dkt 053)", file: "https://raw.githubusercontent.com/legkodymovmedia/legkodymovmedia.github.io/main/resources/2024-07-23%20dkt%20053%20Redacted%20Sentencing%20Reply%20eng(1).pdf" }
+      { date: "2024年7月18日", category: "量刑", title: "量刑备忘录", file: "https://raw.githubusercontent.com/legkodymovmedia/legkodymovmedia.github.io/main/resources/2024-07-18%20Sentencing%20USA%20v.%20LEGKODYMOV%20-%2023-CR-496(ENV)%20(1)(1).pdf" },
+      { date: "2024年7月23日", category: "专家报告", title: "独立加密专家报告——公司活动审计", file: "https://raw.githubusercontent.com/legkodymovmedia/legkodymovmedia.github.io/main/resources/2024-07-23%20Audit%20report%20eng.pdf" },
+      { date: "2024年7月23日", category: "量刑", title: "量刑答复(经删节,dkt 053)", file: "https://raw.githubusercontent.com/legkodymovmedia/legkodymovmedia.github.io/main/resources/2024-07-23%20dkt%20053%20Redacted%20Sentencing%20Reply%20eng(1).pdf" }
     ]
   };
-  renderVals() {
-    return { documents: this.state.documents };
-  }
+  renderVals() { return { documents: this.state.documents }; }
 }
-
 </script>
 </body>
 </html>

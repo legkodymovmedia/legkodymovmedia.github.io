@@ -3,6 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="/favicon.png">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110917422', 'ym');
+
+    ym(110917422, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/110917422" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 <script src="../support.js"></script>
 </head>
 <body>
@@ -27,6 +41,8 @@
     <div style="display:flex;gap:8px;font:600 12px 'IBM Plex Mono',monospace">
       <a href="/ru/news/" style="padding:3px 8px;color:#666">RU</a>
       <a href="/news/" style="padding:3px 8px;background:#111;color:#fff">EN</a>
+      <a href="/fr/news/" style="padding:3px 8px;color:#666">FR</a>
+    <a href="/zh/news/" style="padding:3px 8px;color:#666">ZH</a>
     </div>
   </div>
 
@@ -107,6 +123,21 @@ class Component extends DCLogic {
   state = {
     activeSlug: null,
     posts: [
+      {
+        slug: "radio-in-an-american-prison",
+        date: "21 July 2026",
+        tag: "Note",
+        title: "Radio in an American Prison: Four Minutes of Freedom an Hour",
+        paragraphs: [
+          "Many people ask what I do while held captive by the French. Let me share a small piece of my daily life.",
+          "In some U.S. federal prisons, inmates are allowed to use a radio. It's a rather unusual privilege. The selection is modest — around fifteen stations are available — but even that is a small joy, a way to break up the monotony of prison routine.",
+          "My favorite station is Coast to Coast AM. It's probably the only thing on American radio I can genuinely listen to. There's minimal politics and propaganda. The hosts bring on well-known doctors, scientists, psychologists and economists — smart, interesting people who are a pleasure to listen to.",
+          "The topics vary wildly: from Bigfoot, UFOs and so-called classified disclosures to predictions, mysterious phenomena and questions of longevity. Even setting aside the mysticism and fortune-telling, there are plenty of substantive episodes I'll happily keep listening to after my release.",
+          "For example, an interesting episode aired recently, on July 4, about extending human life. Two young men talked about their documentary, Forever Young. Unfortunately, I'll only be able to watch it once I'm home.",
+          "The show averages around four million listeners. You can tell the hosts prepare seriously, and the guests are almost always genuinely interesting. Thirty years in, the show hasn't lost its quality — and that deserves respect.",
+          "In detention, broadcasts like this become something more than background noise. They're a rare chance to hear voices from the outside world, learn something new, and feel free, if only for a little while."
+        ]
+      },
       {
         slug: "case-closed-france-still-chasing",
         date: "2 July 2026",
