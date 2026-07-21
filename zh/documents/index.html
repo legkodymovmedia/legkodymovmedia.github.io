@@ -55,7 +55,6 @@
   <main style="flex:1;max-width:760px;margin:0 auto;padding:48px 32px 80px;width:100%;box-sizing:border-box">
     <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:32px;margin:0 0 8px">法庭文件</h1>
     <p style="color:#666;font-size:14px;margin:0 0 8px;max-width:56ch">法律文件是最主要的真相来源。案卷材料、判决书和专家报告将在可获得后陆续发布于此。</p>
-    <p style="color:#9c2f22;font-size:12.5px;font-family:'IBM Plex Mono',monospace;margin:0 0 40px">如需添加文件:将PDF放入 /documents 目录,并在下方添加一行,注明标题、日期、类别和文件路径。</p>
 
     <sc-for list="{{ documents }}" as="doc" hint-placeholder-count="3">
       <a href="{{ doc.file }}" style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid #e4e4e4;text-decoration:none;color:inherit">

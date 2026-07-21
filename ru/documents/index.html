@@ -48,14 +48,13 @@
     <a href="/ru/news/" style="color:#555">Новости</a>
     <a href="/ru/media/" style="color:#555">СМИ</a>
     <a href="/ru/documents/" style="color:#111;border-bottom:2px solid #9c2f22;padding-bottom:2px">Документы суда</a>
-    <a href="/ru/library/" style="color:#555">Библиотека</a>
+    <a href="/ru/library/" style="color:#555">Библиотека Анатолия Легкодымова</a>
     <a href="/ru/contacts/" style="color:#555">Контакты</a>
   </nav>
 
   <main style="flex:1;max-width:760px;margin:0 auto;padding:48px 32px 80px;width:100%;box-sizing:border-box">
     <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:34px;margin:0 0 8px">Документы суда</h1>
     <p style="color:#666;font-size:14px;margin:0 0 8px;max-width:56ch">Юридические документы — главный источник правды. Материалы дела, решения суда и экспертные заключения публикуются здесь по мере появления.</p>
-    <p style="color:#9c2f22;font-size:12.5px;font-family:'IBM Plex Mono',monospace;margin:0 0 40px">Чтобы добавить документ: положите PDF в /documents и добавьте строку ниже с названием, датой, категорией и путём к файлу.</p>
 
     <sc-for list="{{ documents }}" as="doc" hint-placeholder-count="3">
       <a href="{{ doc.file }}" style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid #e4e4e4;text-decoration:none;color:inherit">
