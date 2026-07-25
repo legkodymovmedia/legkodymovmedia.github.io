@@ -64,8 +64,18 @@
       </div>
       <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:34px;line-height:1.2;margin:0 0 26px;color:#111">{{ activePost.title }}</h1>
       <div style="font-size:17px;line-height:1.8;color:#222">
-        <sc-for list="{{ activePost.paragraphs }}" as="para" hint-placeholder-count="3">
-          <p style="margin:0 0 18px">{{ para }}</p>
+        <sc-for list="{{ activePost.blocks }}" as="block" hint-placeholder-count="3">
+          <sc-if value="{{ block.isQuote }}" hint-placeholder-val="{{ false }}">
+            <blockquote style="margin:0 0 18px;padding:2px 22px;border-left:3px solid #9c2f22;background:#faf5f4">
+              <p style="margin:0 0 10px;white-space:pre-line;color:#333;font-style:italic">{{ block.text }}</p>
+              <sc-if value="{{ block.sourceUrl }}" hint-placeholder-val="{{ false }}">
+                <a href="{{ block.sourceUrl }}" style="font:600 11.5px 'IBM Plex Mono',monospace;color:#9c2f22;font-style:normal">{{ block.sourceLabel }} →</a>
+              </sc-if>
+            </blockquote>
+          </sc-if>
+          <sc-if value="{{ block.isPlain }}" hint-placeholder-val="{{ true }}">
+            <p style="margin:0 0 18px">{{ block.text }}</p>
+          </sc-if>
         </sc-for>
       </div>
       <sc-if value="{{ activePost.linkUrl }}" hint-placeholder-val="{{ false }}">
@@ -123,6 +133,17 @@ class Component extends DCLogic {
   state = {
     activeSlug: null,
     posts: [
+      {
+        slug: "binance-was-the-number-one-hydra-launderer",
+        date: "25 июля 2026",
+        tag: "Аналитика",
+        title: "Binance был #1 прачечной Hydra.",
+        blocks: [
+          { isQuote: true, text: "Reuters изучило подробные данные о транзакциях клиентов Binance на сайтах даркнета — торговых площадках, где продаются наркотики, оружие и другие незаконные товары. Большую часть данных предоставила Crystal Blockchain — аналитическая компания из Амстердама, которая помогает компаниям и государственным органам отслеживать движение криптовалютных средств.\n\nСогласно этим данным, с 2017 по 2022 год покупатели и продавцы крупнейшего в мире даркнет-рынка наркотиков — русскоязычной площадки Hydra — использовали Binance для отправки и получения криптовалютных платежей на общую сумму 780 миллионов долларов. Reuters перепроверило эти цифры с помощью другой аналитической компании, которая подтвердила полученные результаты.", sourceUrl: "https://www.reuters.com/legal/government/how-crypto-giant-binance-became-hub-hackers-fraudsters-drug-traffickers-2022-06-07/", sourceLabel: "Источник: Reuters" },
+          { isPlain: true, text: "На втором месте был LocalBitcoins." },
+          { isQuote: true, text: "Что касается крупнейших прямых контрагентов, данные показывают, что основным получателем исходящих переводов с Hydra была платформа LocalBitcoins. Общий объём транзакций, отправленных с Hydra на LocalBitcoins, составил 413,2 млн долларов США.", sourceUrl: "https://web.archive.org/web/20220929160817/https://clain.io/blog/post/near-20b-passed-through-high-risk-exchanges-in-2020", sourceLabel: "Источник" }
+        ]
+      },
       {
         slug: "radio-in-an-american-prison",
         date: "21 июля 2026",
@@ -321,11 +342,16 @@ class Component extends DCLogic {
   }
 
   renderVals() {
-    const posts = this.state.posts.map(p => ({
-      ...p,
-      href: "#" + p.slug,
-      excerpt: p.excerpt || (p.paragraphs[0].length > 150 ? p.paragraphs[0].slice(0, 150).trim() + "…" : p.paragraphs[0])
-    }));
+    const posts = this.state.posts.map(p => {
+      const blocks = p.blocks || (p.paragraphs || []).map(text => ({ isPlain: true, text }));
+      const firstText = (blocks.find(b => b.text) || {}).text || "";
+      return {
+        ...p,
+        blocks,
+        href: "#" + p.slug,
+        excerpt: p.excerpt || (firstText.length > 150 ? firstText.slice(0, 150).trim() + "…" : firstText)
+      };
+    });
     const activePost = posts.find(p => p.slug === this.state.activeSlug) || null;
     return {
       posts,

@@ -64,8 +64,18 @@
       </div>
       <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:34px;line-height:1.2;margin:0 0 26px;color:#111">{{ activePost.title }}</h1>
       <div style="font-size:17px;line-height:1.8;color:#222">
-        <sc-for list="{{ activePost.paragraphs }}" as="para" hint-placeholder-count="3">
-          <p style="margin:0 0 18px">{{ para }}</p>
+        <sc-for list="{{ activePost.blocks }}" as="block" hint-placeholder-count="3">
+          <sc-if value="{{ block.isQuote }}" hint-placeholder-val="{{ false }}">
+            <blockquote style="margin:0 0 18px;padding:2px 22px;border-left:3px solid #9c2f22;background:#faf5f4">
+              <p style="margin:0 0 10px;white-space:pre-line;color:#333;font-style:italic">{{ block.text }}</p>
+              <sc-if value="{{ block.sourceUrl }}" hint-placeholder-val="{{ false }}">
+                <a href="{{ block.sourceUrl }}" style="font:600 11.5px 'IBM Plex Mono',monospace;color:#9c2f22;font-style:normal">{{ block.sourceLabel }} →</a>
+              </sc-if>
+            </blockquote>
+          </sc-if>
+          <sc-if value="{{ block.isPlain }}" hint-placeholder-val="{{ true }}">
+            <p style="margin:0 0 18px">{{ block.text }}</p>
+          </sc-if>
         </sc-for>
       </div>
       <sc-if value="{{ activePost.linkUrl }}" hint-placeholder-val="{{ false }}">
@@ -123,6 +133,17 @@ class Component extends DCLogic {
   state = {
     activeSlug: null,
     posts: [
+      {
+        slug: "binance-was-the-number-one-hydra-launderer",
+        date: "25 July 2026",
+        tag: "Analysis",
+        title: "Binance was Hydra's #1 laundering platform.",
+        blocks: [
+          { isQuote: true, text: "Reuters examined detailed data on Binance customer transactions on dark web sites — marketplaces where drugs, weapons and other illicit goods are sold. Most of the data was supplied by Crystal Blockchain, an Amsterdam-based analytics firm that helps companies and government bodies track the movement of cryptocurrency funds.\n\nAccording to this data, from 2017 to 2022, buyers and sellers on the world's largest dark web drug marketplace — the Russian-language platform Hydra — used Binance to send and receive cryptocurrency payments totaling $780 million. Reuters cross-checked these figures with another analytics firm, which confirmed the findings.", sourceUrl: "https://www.reuters.com/legal/government/how-crypto-giant-binance-became-hub-hackers-fraudsters-drug-traffickers-2022-06-07/", sourceLabel: "Source: Reuters" },
+          { isPlain: true, text: "In second place was LocalBitcoins." },
+          { isQuote: true, text: "As for the largest direct counterparties, the data shows that the main recipient of outgoing transfers from Hydra was the LocalBitcoins platform. The total volume of transactions sent from Hydra to LocalBitcoins amounted to $413.2 million.", sourceUrl: "https://web.archive.org/web/20220929160817/https://clain.io/blog/post/near-20b-passed-through-high-risk-exchanges-in-2020", sourceLabel: "Source" }
+        ]
+      },
       {
         slug: "radio-in-an-american-prison",
         date: "21 July 2026",
@@ -321,11 +342,16 @@ class Component extends DCLogic {
   }
 
   renderVals() {
-    const posts = this.state.posts.map(p => ({
-      ...p,
-      href: "#" + p.slug,
-      excerpt: p.excerpt || (p.paragraphs[0].length > 150 ? p.paragraphs[0].slice(0, 150).trim() + "…" : p.paragraphs[0])
-    }));
+    const posts = this.state.posts.map(p => {
+      const blocks = p.blocks || (p.paragraphs || []).map(text => ({ isPlain: true, text }));
+      const firstText = (blocks.find(b => b.text) || {}).text || "";
+      return {
+        ...p,
+        blocks,
+        href: "#" + p.slug,
+        excerpt: p.excerpt || (firstText.length > 150 ? firstText.slice(0, 150).trim() + "…" : firstText)
+      };
+    });
     const activePost = posts.find(p => p.slug === this.state.activeSlug) || null;
     return {
       posts,

@@ -64,8 +64,18 @@
       </div>
       <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:32px;line-height:1.3;margin:0 0 26px;color:#111">{{ activePost.title }}</h1>
       <div style="font-size:17px;line-height:1.9;color:#222">
-        <sc-for list="{{ activePost.paragraphs }}" as="para" hint-placeholder-count="3">
-          <p style="margin:0 0 18px">{{ para }}</p>
+        <sc-for list="{{ activePost.blocks }}" as="block" hint-placeholder-count="3">
+          <sc-if value="{{ block.isQuote }}" hint-placeholder-val="{{ false }}">
+            <blockquote style="margin:0 0 18px;padding:2px 22px;border-left:3px solid #9c2f22;background:#faf5f4">
+              <p style="margin:0 0 10px;white-space:pre-line;color:#333;font-style:italic">{{ block.text }}</p>
+              <sc-if value="{{ block.sourceUrl }}" hint-placeholder-val="{{ false }}">
+                <a href="{{ block.sourceUrl }}" style="font:600 11.5px 'IBM Plex Mono',monospace;color:#9c2f22;font-style:normal">{{ block.sourceLabel }} →</a>
+              </sc-if>
+            </blockquote>
+          </sc-if>
+          <sc-if value="{{ block.isPlain }}" hint-placeholder-val="{{ true }}">
+            <p style="margin:0 0 18px">{{ block.text }}</p>
+          </sc-if>
         </sc-for>
       </div>
       <sc-if value="{{ activePost.linkUrl }}" hint-placeholder-val="{{ false }}">
@@ -120,6 +130,17 @@ class Component extends DCLogic {
   state = {
     activeSlug: null,
     posts: [
+      {
+        slug: "binance-was-the-number-one-hydra-launderer",
+        date: "2026年7月25日",
+        tag: "分析",
+        title: "Binance 曾是 Hydra 的头号洗钱平台。",
+        blocks: [
+          { isQuote: true, text: "路透社审查了 Binance 客户在暗网网站上的详细交易数据——这些交易平台上出售毒品、武器及其他非法商品。大部分数据由总部位于阿姆斯特丹的分析公司 Crystal Blockchain 提供,该公司帮助企业和政府机构追踪加密货币资金的流动。\n\n根据这些数据,2017年至2022年间,全球最大暗网毒品交易平台——俄语平台 Hydra——的买卖双方通过 Binance 发送和接收的加密货币支付总额达7.8亿美元。路透社通过另一家分析公司核实了这些数字,该公司确认了这一结果。", sourceUrl: "https://www.reuters.com/legal/government/how-crypto-giant-binance-became-hub-hackers-fraudsters-drug-traffickers-2022-06-07/", sourceLabel: "来源:路透社" },
+          { isPlain: true, text: "排名第二的是 LocalBitcoins。" },
+          { isQuote: true, text: "就最大的直接交易对手而言,数据显示 LocalBitcoins 平台是 Hydra 转出资金的主要接收方。从 Hydra 转往 LocalBitcoins 的交易总额达4.132亿美元。", sourceUrl: "https://web.archive.org/web/20220929160817/https://clain.io/blog/post/near-20b-passed-through-high-risk-exchanges-in-2020", sourceLabel: "来源" }
+        ]
+      },
       {
         slug: "radio-in-an-american-prison",
         date: "2026年7月21日",
@@ -318,11 +339,16 @@ class Component extends DCLogic {
   }
 
   renderVals() {
-    const posts = this.state.posts.map(p => ({
-      ...p,
-      href: "#" + p.slug,
-      excerpt: p.excerpt || (p.paragraphs[0].length > 70 ? p.paragraphs[0].slice(0, 70).trim() + "…" : p.paragraphs[0])
-    }));
+    const posts = this.state.posts.map(p => {
+      const blocks = p.blocks || (p.paragraphs || []).map(text => ({ isPlain: true, text }));
+      const firstText = (blocks.find(b => b.text) || {}).text || "";
+      return {
+        ...p,
+        blocks,
+        href: "#" + p.slug,
+        excerpt: p.excerpt || (firstText.length > 70 ? firstText.slice(0, 70).trim() + "…" : firstText)
+      };
+    });
     const activePost = posts.find(p => p.slug === this.state.activeSlug) || null;
     return {
       posts,
