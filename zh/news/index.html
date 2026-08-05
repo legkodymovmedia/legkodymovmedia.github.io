@@ -64,18 +64,33 @@
       </div>
       <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:32px;line-height:1.3;margin:0 0 26px;color:#111">{{ activePost.title }}</h1>
       <div style="font-size:17px;line-height:1.9;color:#222">
-        <sc-for list="{{ activePost.blocks }}" as="block" hint-placeholder-count="3">
-          <sc-if value="{{ block.isQuote }}" hint-placeholder-val="{{ false }}">
-            <blockquote style="margin:0 0 18px;padding:2px 22px;border-left:3px solid #9c2f22;background:#faf5f4">
-              <p style="margin:0 0 10px;white-space:pre-line;color:#333;font-style:italic">{{ block.text }}</p>
-              <sc-if value="{{ block.sourceUrl }}" hint-placeholder-val="{{ false }}">
-                <a href="{{ block.sourceUrl }}" style="font:600 11.5px 'IBM Plex Mono',monospace;color:#9c2f22;font-style:normal">{{ block.sourceLabel }} →</a>
-              </sc-if>
-            </blockquote>
-          </sc-if>
-          <sc-if value="{{ block.isPlain }}" hint-placeholder-val="{{ true }}">
-            <p style="margin:0 0 18px">{{ block.text }}</p>
-          </sc-if>
+        <sc-for list="{{ activePost.htmlParagraphs }}" as="para" hint-placeholder-count="3">
+          <p style="margin:0 0 18px" dangerouslySetInnerHTML="{{ para }}"></p>
+        </sc-for>
+        <sc-if value="{{ activePost.table }}" hint-placeholder-val="{{ false }}">
+          <div style="overflow-x:auto;margin:8px 0 28px">
+            <table style="width:100%;border-collapse:collapse;font-size:14px">
+              <thead>
+                <tr>
+                  <sc-for list="{{ activePost.table.headers }}" as="h" hint-placeholder-count="5">
+                    <th style="text-align:left;padding:8px 10px;border-bottom:2px solid #111;font:600 11px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.03em;color:#555">{{ h }}</th>
+                  </sc-for>
+                </tr>
+              </thead>
+              <tbody>
+                <sc-for list="{{ activePost.table.rows }}" as="row" hint-placeholder-count="10">
+                  <tr>
+                    <sc-for list="{{ row }}" as="cell" hint-placeholder-count="5">
+                      <td style="padding:8px 10px;border-bottom:1px solid #e4e4e4;vertical-align:top">{{ cell }}</td>
+                    </sc-for>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+        </sc-if>
+        <sc-for list="{{ activePost.htmlParagraphsAfter }}" as="para" hint-placeholder-count="0">
+          <p style="margin:0 0 18px" dangerouslySetInnerHTML="{{ para }}"></p>
         </sc-for>
       </div>
       <sc-if value="{{ activePost.linkUrl }}" hint-placeholder-val="{{ false }}">
@@ -131,29 +146,61 @@ class Component extends DCLogic {
     activeSlug: null,
     posts: [
       {
-        slug: "binance-was-the-number-one-hydra-launderer",
-        date: "2026年7月25日",
+        slug: "freedom-on-paper-extradition-without-evidence",
+        date: "2026年8月5日",
         tag: "分析",
-        title: "Binance 曾是 Hydra 的头号洗钱平台。",
-        blocks: [
-          { isQuote: true, text: "路透社审查了 Binance 客户在暗网网站上的详细交易数据——这些交易平台上出售毒品、武器及其他非法商品。大部分数据由总部位于阿姆斯特丹的分析公司 Crystal Blockchain 提供,该公司帮助企业和政府机构追踪加密货币资金的流动。\n\n根据这些数据,2017年至2022年间,全球最大暗网毒品交易平台——俄语平台 Hydra——的买卖双方通过 Binance 发送和接收的加密货币支付总额达7.8亿美元。路透社通过另一家分析公司核实了这些数字,该公司确认了这一结果。", sourceUrl: "https://www.reuters.com/legal/government/how-crypto-giant-binance-became-hub-hackers-fraudsters-drug-traffickers-2022-06-07/", sourceLabel: "来源:路透社" },
-          { isPlain: true, text: "排名第二的是 LocalBitcoins。" },
-          { isQuote: true, text: "就最大的直接交易对手而言,数据显示 LocalBitcoins 平台是 Hydra 转出资金的主要接收方。从 Hydra 转往 LocalBitcoins 的交易总额达4.132亿美元。", sourceUrl: "https://web.archive.org/web/20220929160817/https://clain.io/blog/post/near-20b-passed-through-high-risk-exchanges-in-2020", sourceLabel: "来源" },
-          { isPlain: true, text: "我并不是在指控 Binance 或 LocalBitcoins 有任何问题。这两家公司都和我一样,经营的是诚实、公开的业务。所有这些统计数据的收集,不过是媒体用来恐吓公众、进行抹黑,以及为 AML 服务打广告的手段。" }
+        title: "纸面上的自由。没有证据的引渡:实际运作方式",
+        paragraphs: [
+          "看起来,一旦刑事案件结案、刑期服满,人就该恢复自由了。但在一个司法管辖区结案,并不能保证在另一个司法管辖区获得自由。引渡制度存在漏洞,使得同一行为可以被两次追究——只要某个国家出于自身利益需要,就可以利用这一点。根源在于“一事不再理”原则(不能因同一行为被审判两次)在形式上的保障并不牢靠,实践中可以通过判决书措辞模糊、语言差异,以及对“专属原则”的漠视而被规避。",
+          "“同一行为不能被审判两次”这个原则看起来很清楚,但“专属原则”是如何运作的,值得进一步细说。",
+          "假设墨西哥要求美国引渡某人,理由是抢劫银行和贩毒。美国法院只批准就这两项指控进行引渡。到了墨西哥,也只能就这两项指控审判他,不能再加上绑架或谋杀——那将违反专属原则。",
+          "历史上不止一次出现过引渡过程中违反上述原则的案例。朱利安·阿桑奇案(美国—英国,2019–2024年)暴露出引渡条约文本本身的一个漏洞:条约第18条允许在引渡之后追加新的指控,甚至追加可判死刑的罪名。英国法院承认了这一风险,但仍然批准了引渡。",
+          "另一个引人注目的案例是塔哈武尔·拉纳。他在芝加哥受审,主要指控——参与孟买恐怖袭击——被判无罪,其他罪名的刑期已经服完,案件本可视为已经了结。但印度专门就恐怖袭击这一情节要求引渡他。从下级法院直到最高法院,各级法院关注的都不是案件实质,而是罪名的措辞——既然罪名的说法不同,那就算是另一个案件。2025年,拉纳被从美国引渡至印度。",
+          "上述案例之所以值得关注,正是因为它们背后的逻辑,与目前围绕加密货币服务Bitzlato创始人阿纳托利·列格科德莫夫一案的争议如出一辙。",
+          "2023年1月,他在美国被捕:纽约东区检察官办公室对他提出了30多项违法指控。列格科德莫夫仅对一项罪名认罪——经营无牌照的资金转账业务。2024年7月,法院判处他已服刑期(1.5年)加两年监督考察。",
+          "看起来案件已经了结。但就在美国审理案件期间,法国已经在准备自己的指控。美国案件结束后,法国立即签发了一份涉及十项罪名的逮捕令,其中两项与美国的指控类似。在这十项指控中,只有3项被提交给负责引渡的法官审查,其余七项从未被审查。",
+          "下表显示了法国的指控与列格科德莫夫在美国已服刑的罪名之间的重叠情况:"
+        ],
+        table: {
+          headers: ["序号", "法国引渡指控", "最高监禁刑期", "美国法官是否审查(十项中仅3项)", "已在美国服刑的对应罪名"],
+          rows: [
+            ["1", "共同非法侵入自动化数据系统", "最高3年(数据损毁/丢失时最高5年)", "否", "与美国案件不重叠"],
+            ["2", "共同非法维持对自动化数据系统的侵入", "最高3年(加重情节时最高5年)", "否", "与美国案件不重叠"],
+            ["3", "共同非法向自动化数据系统输入数据", "最高5年(若为国家系统最高7年)", "否", "与美国案件不重叠"],
+            ["4", "共同非法篡改自动化数据系统中的数据", "最高5年(若为国家系统最高7年)", "否", "与美国案件不重叠"],
+            ["5", "共同妨碍自动化数据系统运行", "最高5年(若为国家系统最高7年)", "否", "与美国案件不重叠"],
+            ["6", "伙同有组织团伙勒索的共谋", "最高20年", "否(十项指控中唯一的重罪)", "与美国案件不重叠"],
+            ["7", "参与以洗钱为目的的犯罪共谋", "最高10年", "是", "《美国法典》第18编第1960条,与美国案件重叠"],
+            ["8", "伙同有组织团伙侵入国家个人数据系统的共谋", "最高10年", "否", "与美国案件不重叠"],
+            ["9", "加重情节洗钱:协助虚构资产来源", "最高10年", "是", "与美国案件重叠,《美国法典》第18编第1960条"],
+            ["10", "加重情节洗钱:参与隐匿或转换犯罪所得", "最高10年", "是", "与美国案件重叠,《美国法典》第18编第1960条"]
+          ]
+        },
+        paragraphsAfter: [
+          "第1至5项及第8项,都是有关侵入自动化系统的指控。提交给美国用于引渡的材料中,没有任何关于入侵行为的证据——没有被描述的入侵过程,也没有被“入侵”的服务器。这些指控从未提交给美国法院,法官也从未对其予以确认或驳回——他根本没有审查过这些指控。",
+          "第6项——有组织团伙勒索——按照法国法律,是这十项指控中唯一的重罪,最高可判20年监禁。缺乏证据支持,这项指控显得像是凭空捏造的:没有勒索的受害者,也没有所谓“被勒索”的具体金额。这一项同样从未提交给美国法官审查。",
+          "第7、9、10项,是美国法官真正审查过的仅有三项指控。其中两项是洗钱,第三项是洗钱共谋。正是在这里,能看到与美国案件的重叠:列格科德莫夫已经就通过同一Bitzlato平台经营无牌照资金转账业务认罪并服刑。美国法官并未排除这两项使引渡成为可能的洗钱指控——尽管它们在事实层面缺乏依据,且与其在美国已服刑期的罪行相重叠。此外还<b>正式</b>附带了另一项指控(参与洗钱共谋),这项指控本身无法独立成立。",
+          "<b>为什么法官只审查了十项指控中的三项?</b>",
+          "目前实际上并不清楚,为什么其余的指控——包括“伙同有组织团伙勒索”这项重罪——始终未被法官审查,而引渡请求中却列出了逮捕令中的全部十项罪名。文件中明确写道:<b>“列格科德莫夫依法国法律还被指控犯有其他罪行,但这些指控目前尚未提交法院审理。”</b>",
+          "这七项对美国法官而言“隐形”且毫无支撑的指控,并未从法国的逮捕令中消失,并在未来构成重大风险。一旦阿纳托利已经身处法国等待审判,没有任何因素能阻止法国方面就剩余的7项指控再次提出引渡请求。",
+          "这种拘留人的运作方式令人诧异。逮捕令中的十项指控营造出一个针对“危险网络犯罪分子”的大案假象。而这个人明明已经因经营同一个Bitzlato平台在美国服完刑期,如今却再度身陷囹圄。这样看来,整个司法程序的目的似乎并不是要在公开审判中证实某个具体的犯罪情节,而是为了把这个人继续关在监狱里。",
+          "<b>引渡制度竟然可以在从未审查过相关指控的情况下,把一个人交出去——实际上等于因同一行为再次惩罚一个已经服完刑期的人。专属原则已有近140年历史,而它被创立的初衷,正是为了防止这种情况发生。</b>",
+          "<i>本文由“BZ Pravo”律师事务所律师撰写。</i>"
         ]
       },
       {
         slug: "radio-in-an-american-prison",
         date: "2026年7月21日",
         tag: "随笔",
-        title: "美国监狱里的收音机",
+        title: "美国监狱里的收音机:每小时四分钟的自由",
         paragraphs: [
-          "很多人好奇,被法国人关押期间我都在做些什么。分享一点日常生活。",
-          "在美国的一些集中营里,是不允许使用收音机的。这里条件好一些,可以听。而且大约有15个电台,这多少让人高兴一点。",
-          "Coast to Coast AM 这档节目,大概是美国广播里唯一值得一听的东西了。政治和宣传内容很少。嘉宾有时是知名医生、科学家、心理学家、经济学家。更多时候,只是一些聪明、值得一听的人。",
-          "如果撇开关于大脚怪、UFO(以及所谓的机密披露)、占卜和预言这些荒诞内容,剩下的那些节目,就算等我出去以后,我也会乐意继续听。",
-          "比如最近,7月4日,有一期关于延长寿命的精彩节目。两个小伙子在推广他们的纪录片——《Forever Young》。可惜这部片子我只能等回家以后才能看了。",
-          "这档节目平均有400万听众。能感觉到主持人准备充分,嘉宾也很有意思。三十年过去了依然没有走样,真不简单!"
+          "很多人问我,被法国方面关押期间都在做些什么。分享一点日常生活。",
+          "在美国的一些联邦监狱里,囚犯被允许使用收音机。这是一项相当不寻常的特权。不过选择不多——大约有十五个电台可收听,但即便如此也是一点小小的慰藉,能帮助打发单调的狱中日子。",
+          "我最喜欢的电台是 Coast to Coast AM。这大概是我在美国广播里唯一真正能听下去的节目。政治和宣传内容很少。主持人邀请的嘉宾包括知名医生、科学家、心理学家和经济学家——都是聪明有趣、值得一听的人。",
+          "节目话题五花八门:从大脚怪、UFO、所谓的机密信息披露,到各种预言、神秘现象以及长寿话题。即便撇开那些神秘学和占卜内容,仍有不少内容扎实的节目,值得我在获释后继续收听。",
+          "比如最近7月4日播出的一期节目,讨论了延长人类寿命的话题。两位年轻人介绍了他们拍摄的纪录片《Forever Young》。可惜我只能等回家后才能看到。",
+          "这档节目平均约有四百万听众。能感觉到主持人做了充分准备,受邀嘉宾也几乎总是真正有意思的人物。节目已经播出三十年,水准没有下降——这一点值得尊敬。",
+          "在监禁的环境下,这类节目已经超越了普通背景音的意义。它是难得的机会,能听到来自外部世界的声音,学到新东西,哪怕只是暂时,也能感受到自由。"
         ]
       },
       {
@@ -340,17 +387,20 @@ class Component extends DCLogic {
   }
 
   renderVals() {
-    const posts = this.state.posts.map(p => {
-      const blocks = p.blocks || (p.paragraphs || []).map(text => ({ isPlain: true, text }));
-      const firstText = (blocks.find(b => b.text) || {}).text || "";
-      return {
-        ...p,
-        blocks,
-        href: "#" + p.slug,
-        excerpt: p.excerpt || (firstText.length > 70 ? firstText.slice(0, 70).trim() + "…" : firstText)
+    const stripHtml = s => s.replace(/<[^>]+>/g, "");
+    const posts = this.state.posts.map(p => ({
+      ...p,
+      href: "#" + p.slug,
+      excerpt: p.excerpt || (p.paragraphs[0].length > 70 ? p.paragraphs[0].slice(0, 70).trim() + "…" : p.paragraphs[0])
+    }));
+    let activePost = posts.find(p => p.slug === this.state.activeSlug) || null;
+    if (activePost) {
+      activePost = {
+        ...activePost,
+        htmlParagraphs: activePost.paragraphs.map(t => ({ __html: t })),
+        htmlParagraphsAfter: (activePost.paragraphsAfter || []).map(t => ({ __html: t }))
       };
-    });
-    const activePost = posts.find(p => p.slug === this.state.activeSlug) || null;
+    }
     return {
       posts,
       activePost,

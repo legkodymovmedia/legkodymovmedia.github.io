@@ -64,18 +64,33 @@
       </div>
       <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:34px;line-height:1.2;margin:0 0 26px;color:#111">{{ activePost.title }}</h1>
       <div style="font-size:17px;line-height:1.8;color:#222">
-        <sc-for list="{{ activePost.blocks }}" as="block" hint-placeholder-count="3">
-          <sc-if value="{{ block.isQuote }}" hint-placeholder-val="{{ false }}">
-            <blockquote style="margin:0 0 18px;padding:2px 22px;border-left:3px solid #9c2f22;background:#faf5f4">
-              <p style="margin:0 0 10px;white-space:pre-line;color:#333;font-style:italic">{{ block.text }}</p>
-              <sc-if value="{{ block.sourceUrl }}" hint-placeholder-val="{{ false }}">
-                <a href="{{ block.sourceUrl }}" style="font:600 11.5px 'IBM Plex Mono',monospace;color:#9c2f22;font-style:normal">{{ block.sourceLabel }} →</a>
-              </sc-if>
-            </blockquote>
-          </sc-if>
-          <sc-if value="{{ block.isPlain }}" hint-placeholder-val="{{ true }}">
-            <p style="margin:0 0 18px">{{ block.text }}</p>
-          </sc-if>
+        <sc-for list="{{ activePost.htmlParagraphs }}" as="para" hint-placeholder-count="3">
+          <p style="margin:0 0 18px" dangerouslySetInnerHTML="{{ para }}"></p>
+        </sc-for>
+        <sc-if value="{{ activePost.table }}" hint-placeholder-val="{{ false }}">
+          <div style="overflow-x:auto;margin:8px 0 28px">
+            <table style="width:100%;border-collapse:collapse;font-size:14px">
+              <thead>
+                <tr>
+                  <sc-for list="{{ activePost.table.headers }}" as="h" hint-placeholder-count="5">
+                    <th style="text-align:left;padding:8px 10px;border-bottom:2px solid #111;font:600 11px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.03em;color:#555">{{ h }}</th>
+                  </sc-for>
+                </tr>
+              </thead>
+              <tbody>
+                <sc-for list="{{ activePost.table.rows }}" as="row" hint-placeholder-count="10">
+                  <tr>
+                    <sc-for list="{{ row }}" as="cell" hint-placeholder-count="5">
+                      <td style="padding:8px 10px;border-bottom:1px solid #e4e4e4;vertical-align:top">{{ cell }}</td>
+                    </sc-for>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+        </sc-if>
+        <sc-for list="{{ activePost.htmlParagraphsAfter }}" as="para" hint-placeholder-count="0">
+          <p style="margin:0 0 18px" dangerouslySetInnerHTML="{{ para }}"></p>
         </sc-for>
       </div>
       <sc-if value="{{ activePost.linkUrl }}" hint-placeholder-val="{{ false }}">
@@ -134,29 +149,61 @@ class Component extends DCLogic {
     activeSlug: null,
     posts: [
       {
-        slug: "binance-was-the-number-one-hydra-launderer",
-        date: "25 July 2026",
+        slug: "freedom-on-paper-extradition-without-evidence",
+        date: "5 August 2026",
         tag: "Analysis",
-        title: "Binance was Hydra's #1 laundering platform.",
-        blocks: [
-          { isQuote: true, text: "Reuters examined detailed data on Binance customer transactions on dark web sites — marketplaces where drugs, weapons and other illicit goods are sold. Most of the data was supplied by Crystal Blockchain, an Amsterdam-based analytics firm that helps companies and government bodies track the movement of cryptocurrency funds.\n\nAccording to this data, from 2017 to 2022, buyers and sellers on the world's largest dark web drug marketplace — the Russian-language platform Hydra — used Binance to send and receive cryptocurrency payments totaling $780 million. Reuters cross-checked these figures with another analytics firm, which confirmed the findings.", sourceUrl: "https://www.reuters.com/legal/government/how-crypto-giant-binance-became-hub-hackers-fraudsters-drug-traffickers-2022-06-07/", sourceLabel: "Source: Reuters" },
-          { isPlain: true, text: "In second place was LocalBitcoins." },
-          { isQuote: true, text: "As for the largest direct counterparties, the data shows that the main recipient of outgoing transfers from Hydra was the LocalBitcoins platform. The total volume of transactions sent from Hydra to LocalBitcoins amounted to $413.2 million.", sourceUrl: "https://web.archive.org/web/20220929160817/https://clain.io/blog/post/near-20b-passed-through-high-risk-exchanges-in-2020", sourceLabel: "Source" },
-          { isPlain: true, text: "I'm not accusing either Binance or LocalBitcoins of anything. Both companies ran honest, transparent businesses, same as I did. All this statistic-gathering is done by publications to scare people, run smear campaigns, and advertise AML services." }
+        title: "Freedom on Paper. Extradition Without Evidence: How It Works in Practice",
+        paragraphs: [
+          "It would seem that once a criminal case is closed and a person has served their sentence, freedom should follow. But closing a case in one jurisdiction doesn't guarantee freedom in another. It turns out the extradition system contains loopholes that let a person be pursued twice for the same act — and any country can use them if its state interest calls for it. The blame lies with the merely formal guarantees of the principle of non bis in idem (no one may be tried twice for the same offense), which in practice can be sidestepped through vague wording in court rulings, linguistic mismatches, and disregard for the rule of specialty.",
+          "The \"no double jeopardy\" principle seems straightforward enough; the rule of specialty is worth unpacking in more detail.",
+          "Say Mexico asks the U.S. to extradite someone for bank robbery and drug trafficking. A U.S. court approves extradition on those two counts. In Mexico, the person can only be tried on those two counts — adding kidnapping or murder isn't allowed. That would violate the rule of specialty.",
+          "History has more than one example of these principles being violated in extradition cases. The case of Julian Assange (U.S.–U.K., 2019–2024) exposed a weakness in the extradition treaty's own text: Article 18 allows new charges — up to capital offenses — to be added after extradition. The British court acknowledged this risk but approved the extradition anyway.",
+          "Another striking case: Tahawwur Rana went to trial in Chicago and was acquitted of the central charge — involvement in the Mumbai terror attacks. He served time on other counts, and the case could have been considered closed. But India sought his extradition specifically over the terror-attack episode. Every court up to the Supreme Court looked not at the substance of the case but at the wording of the statute — since the offense was labeled differently, it counted as a different case. In 2025, Rana was extradited from the U.S. to India.",
+          "These cases matter because they share the same underlying structure now being contested in the case of Anatoly Legkodymov, founder of the cryptocurrency service Bitzlato.",
+          "He was arrested in the U.S. in January 2023: the U.S. Attorney's Office for the Eastern District of New York charged him with more than 30 violations of law. Legkodymov pleaded guilty to only one offense — operating an unlicensed money-transmitting business. In July 2024, the court sentenced him to time already served (1.5 years) plus two years of supervised release.",
+          "It seemed the matter was settled. But while the U.S. case was underway, France was preparing its own charges. Immediately after the American case concluded, France issued a warrant on ten counts, two of which mirror the U.S. charges. Only 3 of the 10 charges were referred to the extradition judge for review; the other seven were never examined.",
+          "The table below shows where the French charges overlap with the offense Legkodymov already served time for in the U.S.:"
+        ],
+        table: {
+          headers: ["No.", "French Extradition Charge", "Max. Prison Term", "Reviewed by U.S. Judge (only 3 of 10)", "U.S. Charge Already Served"],
+          rows: [
+            ["1", "Complicity in unauthorized access to an automated data system", "up to 3 years (up to 5 with data loss/corruption)", "NO", "does not overlap with the U.S. case"],
+            ["2", "Complicity in unlawfully maintaining access to an automated data system", "up to 3 years (up to 5 with aggravating factors)", "NO", "does not overlap with the U.S. case"],
+            ["3", "Complicity in unlawfully entering data into an automated data system", "up to 5 years (up to 7 if a state system)", "NO", "does not overlap with the U.S. case"],
+            ["4", "Complicity in unlawfully altering data in an automated data system", "up to 5 years (up to 7 if a state system)", "NO", "does not overlap with the U.S. case"],
+            ["5", "Complicity in obstructing the operation of an automated data system", "up to 5 years (up to 7 if a state system)", "NO", "does not overlap with the U.S. case"],
+            ["6", "Conspiracy to commit extortion as an organized group", "up to 20 years", "NO (the only felony — \"crime\")", "does not overlap with the U.S. case"],
+            ["7", "Participation in a criminal conspiracy to commit money laundering", "up to 10 years", "YES", "18 U.S.C. § 1960 — overlaps with the U.S. case"],
+            ["8", "Conspiracy to hack a state automated personal-data system as an organized group", "up to 10 years", "NO", "does not overlap with the U.S. case"],
+            ["9", "Aggravated money laundering: facilitating a false justification of the origin of assets", "up to 10 years", "YES", "overlaps with the U.S. case, 18 U.S.C. § 1960"],
+            ["10", "Aggravated money laundering: concealing or converting the proceeds of crime", "up to 10 years", "YES", "overlaps with the U.S. case, 18 U.S.C. § 1960"]
+          ]
+        },
+        paragraphsAfter: [
+          "Rows 1–5 and 8 are charges of hacking automated systems. The materials submitted to the U.S. for extradition contain no evidence of hacking — no described breach, no server that was \"hacked.\" These counts were never put before a U.S. court. The judge neither confirmed nor rejected them — he simply never reviewed them.",
+          "Row 6 — extortion by an organized group — is, under French law, the only felony among the ten charges, carrying up to 20 years. Without an evidentiary basis, it looks invented: there's no extortion victim and no sum that was supposedly extorted. It, too, never reached a U.S. judge for review.",
+          "Rows 7, 9, and 10 are the only three counts the U.S. judge actually reviewed. Two are money laundering, the third is conspiracy to commit the same laundering. This is exactly where the overlap with the U.S. case lies: Legkodymov already pleaded guilty and served his sentence for operating an unlicensed money-transmitting business through that same Bitzlato platform. The U.S. judge did not rule out the two money-laundering charges that make extradition possible — even though they are without merit on the facts and overlap with the sentence already served in the U.S. A further charge (conspiracy to launder) <b>formally</b> attaches to them but cannot stand on its own.",
+          "<b>Why did the judge review only three charges out of ten?</b>",
+          "It remains unclear why the remaining charges — including the felony count of \"complicity in extortion by an organized group\" — were never reviewed by the judge, even though the extradition request cites all ten offenses from the arrest warrant. The filings state outright: <b>\"Legkodymov is also charged with other offenses under French law that have not currently been referred for court review.\"</b>",
+          "Seven charges — invisible to, and unsupported before, the American judge — haven't disappeared from the French warrant, and they pose significant future risk. Nothing stops the French side from requesting extradition again on the remaining 7 charges once Anatoly is already in France awaiting trial.",
+          "The mechanics of holding a person are striking. Ten counts on the warrant create the appearance of a sweeping case against a \"dangerous cybercriminal.\" Yet the man has already served his U.S. sentence for running that same Bitzlato platform, and now sits in custody again. It starts to look as though the point of the proceeding isn't to prove a specific criminal episode in open court — it's to keep the person locked up.",
+          "<b>The extradition system is capable of handing someone over without ever having reviewed the charges against them — and of effectively punishing them again for conduct they've already served time for. The rule of specialty is nearly 140 years old, and it was created precisely to prevent this.</b>",
+          "<i>Review prepared by a lawyer at \"BZ Pravo.\"</i>"
         ]
       },
       {
         slug: "radio-in-an-american-prison",
         date: "21 July 2026",
         tag: "Note",
-        title: "Radio in an American Prison",
+        title: "Radio in an American Prison: Four Minutes of Freedom an Hour",
         paragraphs: [
-          "Many people ask what I do while held captive by the French. I'll share a small piece of my daily life.",
-          "In some U.S. concentration camps, radio isn't allowed. This place is a bit better — here it's allowed. Plus there are about 15 radio stations, which is a small comfort.",
-          "The show Coast to Coast AM is probably the only thing worth listening to on American radio. Minimal politics and propaganda. Guests are sometimes well-known doctors, scientists, psychologists, economists. More often, just smart people who are a pleasure to listen to.",
-          "Set aside the nonsense about Bigfoot, UFOs (and disclosure), fortune-telling and predictions — what's left are shows I'll happily keep listening to even after I get out.",
-          "For example, recently, on July 4, there was a great episode about extending life. Two guys were promoting their documentary — Forever Young. Unfortunately I'll only be able to watch the film once I'm home.",
-          "The show averages 4 million listeners. You can tell the hosts are well-prepared, the guests are interesting. Thirty years in and still going strong — well done to them!"
+          "Many people ask what I do while held captive by the French. Let me share a small piece of my daily life.",
+          "In some U.S. federal prisons, inmates are allowed to use a radio. It's a rather unusual privilege. The selection is modest — around fifteen stations are available — but even that is a small joy, a way to break up the monotony of prison routine.",
+          "My favorite station is Coast to Coast AM. It's probably the only thing on American radio I can genuinely listen to. There's minimal politics and propaganda. The hosts bring on well-known doctors, scientists, psychologists and economists — smart, interesting people who are a pleasure to listen to.",
+          "The topics vary wildly: from Bigfoot, UFOs and so-called classified disclosures to predictions, mysterious phenomena and questions of longevity. Even setting aside the mysticism and fortune-telling, there are plenty of substantive episodes I'll happily keep listening to after my release.",
+          "For example, an interesting episode aired recently, on July 4, about extending human life. Two young men talked about their documentary, Forever Young. Unfortunately, I'll only be able to watch it once I'm home.",
+          "The show averages around four million listeners. You can tell the hosts prepare seriously, and the guests are almost always genuinely interesting. Thirty years in, the show hasn't lost its quality — and that deserves respect.",
+          "In detention, broadcasts like this become something more than background noise. They're a rare chance to hear voices from the outside world, learn something new, and feel free, if only for a little while."
         ]
       },
       {
@@ -343,17 +390,20 @@ class Component extends DCLogic {
   }
 
   renderVals() {
-    const posts = this.state.posts.map(p => {
-      const blocks = p.blocks || (p.paragraphs || []).map(text => ({ isPlain: true, text }));
-      const firstText = (blocks.find(b => b.text) || {}).text || "";
-      return {
-        ...p,
-        blocks,
-        href: "#" + p.slug,
-        excerpt: p.excerpt || (firstText.length > 150 ? firstText.slice(0, 150).trim() + "…" : firstText)
+    const stripHtml = s => s.replace(/<[^>]+>/g, "");
+    const posts = this.state.posts.map(p => ({
+      ...p,
+      href: "#" + p.slug,
+      excerpt: p.excerpt || (p.paragraphs[0].length > 150 ? p.paragraphs[0].slice(0, 150).trim() + "…" : p.paragraphs[0])
+    }));
+    let activePost = posts.find(p => p.slug === this.state.activeSlug) || null;
+    if (activePost) {
+      activePost = {
+        ...activePost,
+        htmlParagraphs: activePost.paragraphs.map(t => ({ __html: t })),
+        htmlParagraphsAfter: (activePost.paragraphsAfter || []).map(t => ({ __html: t }))
       };
-    });
-    const activePost = posts.find(p => p.slug === this.state.activeSlug) || null;
+    }
     return {
       posts,
       activePost,
