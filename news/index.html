@@ -92,6 +92,9 @@
         <sc-for list="{{ activePost.htmlParagraphsAfter }}" as="para" hint-placeholder-count="0">
           <p style="margin:0 0 18px" dangerouslySetInnerHTML="{{ para }}"></p>
         </sc-for>
+        <sc-if value="{{ activePost.image }}" hint-placeholder-val="{{ false }}">
+          <img src="{{ activePost.image }}" style="max-width:100%;border-radius:2px;margin-top:8px" alt="" />
+        </sc-if>
       </div>
       <sc-if value="{{ activePost.linkUrl }}" hint-placeholder-val="{{ false }}">
         <a href="{{ activePost.linkUrl }}" style="font:600 12px 'IBM Plex Mono',monospace;display:inline-block;margin-top:8px">{{ activePost.linkLabel }} →</a>
@@ -148,6 +151,21 @@ class Component extends DCLogic {
   state = {
     activeSlug: null,
     posts: [
+      {
+        slug: "on-some-inaccurate-claims",
+        date: "6 August 2026",
+        tag: "Statement",
+        title: "On Some Inaccurate Claims",
+        paragraphs: [
+          "An article recently appeared on <a href=\"https://forklog.com/exclusive/krajnij-byl-nedavno?utm_source=fltgmain&utm_medium=social&utm_campaign=fltrack&sntzd_campaign=1\">Forklog</a>. I was mentioned in it by a Mr. Bukh. Mr. Bukh very much wanted to become my lawyer, and to that end specifically flew to Miami to meet with me, though no one had asked him to come.",
+          "We spoke for two hours, and he didn't strike me as a competent lawyer.",
+          "Naturally, I did not choose him.",
+          "He was left with a grudge over not being chosen. My partner, Anton Shkurenko, didn't choose him either.",
+          "Out of a desire for revenge, he keeps writing nasty things about me, even though three (!) years have now passed. He may also be working for the French prosecutors — I don't know whether the French give Mr. Bukh any gifts for that.",
+          "As for the substance of the article — the scammers, and my guilty plea, as it actually happened — read <a href=\"https://www.dlnews.com/research/internal/pardon-me-a-qa-with-anatoly-legkodymov/\">my interview</a>."
+        ],
+        image: "meme.jpg"
+      },
       {
         slug: "freedom-on-paper-extradition-without-evidence",
         date: "5 August 2026",

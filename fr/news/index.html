@@ -92,6 +92,9 @@
         <sc-for list="{{ activePost.htmlParagraphsAfter }}" as="para" hint-placeholder-count="0">
           <p style="margin:0 0 18px" dangerouslySetInnerHTML="{{ para }}"></p>
         </sc-for>
+        <sc-if value="{{ activePost.image }}" hint-placeholder-val="{{ false }}">
+          <img src="{{ activePost.image }}" style="max-width:100%;border-radius:2px;margin-top:8px" alt="" />
+        </sc-if>
       </div>
       <sc-if value="{{ activePost.linkUrl }}" hint-placeholder-val="{{ false }}">
         <a href="{{ activePost.linkUrl }}" style="font:600 12px 'IBM Plex Mono',monospace;display:inline-block;margin-top:8px">{{ activePost.linkLabel }} →</a>
@@ -145,6 +148,21 @@ class Component extends DCLogic {
   state = {
     activeSlug: null,
     posts: [
+      {
+        slug: "on-some-inaccurate-claims",
+        date: "6 août 2026",
+        tag: "Déclaration",
+        title: "Sur quelques affirmations inexactes",
+        paragraphs: [
+          "Un article est récemment paru sur <a href=\"https://forklog.com/exclusive/krajnij-byl-nedavno?utm_source=fltgmain&utm_medium=social&utm_campaign=fltrack&sntzd_campaign=1\">Forklog</a>. J'y ai été mentionné par un certain M. Boukh. M. Boukh souhaitait vivement devenir mon avocat, et s'est spécialement rendu à Miami pour me rencontrer, sans que personne ne l'y ait invité.",
+          "Nous nous sommes parlé pendant deux heures, et il ne m'a pas fait l'effet d'un avocat compétent.",
+          "Naturellement, je ne l'ai pas choisi.",
+          "Il en a gardé une rancœur de ne pas avoir été choisi. Mon associé, Anton Chkourenko, ne l'a pas choisi non plus.",
+          "Par désir de vengeance, il continue d'écrire des choses désagréables sur moi, alors que trois (!) années se sont déjà écoulées. Il travaille peut-être aussi pour les procureurs français — je ne sais pas si les Français font des cadeaux à M. Boukh pour cela.",
+          "Sur le fond de l'article — les escrocs, et mon plaidoyer de culpabilité, tel qu'il s'est réellement déroulé — lisez <a href=\"https://www.dlnews.com/research/internal/pardon-me-a-qa-with-anatoly-legkodymov/\">mon interview</a>."
+        ],
+        image: "../news/meme.jpg"
+      },
       {
         slug: "freedom-on-paper-extradition-without-evidence",
         date: "5 août 2026",

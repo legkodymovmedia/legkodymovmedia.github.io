@@ -92,6 +92,9 @@
         <sc-for list="{{ activePost.htmlParagraphsAfter }}" as="para" hint-placeholder-count="0">
           <p style="margin:0 0 18px" dangerouslySetInnerHTML="{{ para }}"></p>
         </sc-for>
+        <sc-if value="{{ activePost.image }}" hint-placeholder-val="{{ false }}">
+          <img src="{{ activePost.image }}" style="max-width:100%;border-radius:2px;margin-top:8px" alt="" />
+        </sc-if>
       </div>
       <sc-if value="{{ activePost.linkUrl }}" hint-placeholder-val="{{ false }}">
         <a href="{{ activePost.linkUrl }}" style="font:600 12px 'IBM Plex Mono',monospace;display:inline-block;margin-top:8px">{{ activePost.linkLabel }} →</a>
@@ -145,6 +148,21 @@ class Component extends DCLogic {
   state = {
     activeSlug: null,
     posts: [
+      {
+        slug: "on-some-inaccurate-claims",
+        date: "2026年8月6日",
+        tag: "声明",
+        title: "关于一些不实说法",
+        paragraphs: [
+          "最近<a href=\"https://forklog.com/exclusive/krajnij-byl-nedavno?utm_source=fltgmain&utm_medium=social&utm_campaign=fltrack&sntzd_campaign=1\">Forklog</a>发布了一篇文章。布赫先生在文章中提到了我。布赫先生非常想成为我的律师,为此还专程飞往迈阿密与我见面,尽管从来没有人邀请过他。",
+          "我们交谈了两个小时,他并没有给我留下一位胜任律师的印象。",
+          "我当然没有选择他。",
+          "由于没有被选中,他心里因此产生了怨气。我的合伙人安东·什库连科也没有选他。",
+          "出于报复心理,他至今仍在写一些抹黑我的文章,尽管已经过去了整整三(!)年。也许他还在为法国检方效力——我不知道法国人是否会为此给布赫先生一些好处。",
+          "关于文章中提到的骗子问题,以及我认罪的真实经过——请阅读<a href=\"https://www.dlnews.com/research/internal/pardon-me-a-qa-with-anatoly-legkodymov/\">我的采访</a>。"
+        ],
+        image: "../news/meme.jpg"
+      },
       {
         slug: "freedom-on-paper-extradition-without-evidence",
         date: "2026年8月5日",

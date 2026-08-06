@@ -92,6 +92,9 @@
         <sc-for list="{{ activePost.htmlParagraphsAfter }}" as="para" hint-placeholder-count="0">
           <p style="margin:0 0 18px" dangerouslySetInnerHTML="{{ para }}"></p>
         </sc-for>
+        <sc-if value="{{ activePost.image }}" hint-placeholder-val="{{ false }}">
+          <img src="{{ activePost.image }}" style="max-width:100%;border-radius:2px;margin-top:8px" alt="" />
+        </sc-if>
       </div>
       <sc-if value="{{ activePost.linkUrl }}" hint-placeholder-val="{{ false }}">
         <a href="{{ activePost.linkUrl }}" style="font:600 12px 'IBM Plex Mono',monospace;display:inline-block;margin-top:8px">{{ activePost.linkLabel }} →</a>
@@ -148,6 +151,21 @@ class Component extends DCLogic {
   state = {
     activeSlug: null,
     posts: [
+      {
+        slug: "on-some-inaccurate-claims",
+        date: "6 августа 2026",
+        tag: "Заявление",
+        title: "О некоторых недостоверных утверждениях",
+        paragraphs: [
+          "Недавно вышла статья на <a href=\"https://forklog.com/exclusive/krajnij-byl-nedavno?utm_source=fltgmain&utm_medium=social&utm_campaign=fltrack&sntzd_campaign=1\">Forklog</a>. Я был упомянут в этой статье господином Бухом. Господин Бух очень хотел стать моим адвокатом, и ради этого специально приехал в Майами ради встречи со мной, хотя его никто не звал.",
+          "Мы с ним сообщались два часа, и он не произвёл на меня впечатление компетентного адвоката.",
+          "Конечно же, я выбрал не его.",
+          "У него в душе появилась обида на то, что я его не выбрал. Также его не выбрал и мой партнёр, Антон Шкуренко.",
+          "Из-за желания отомстить он продолжает писать гадости обо мне, хотя уже прошло три (!) года. Возможно, также он работает на французских прокуроров, я не знаю, делают ли французы какие-либо подарки господину Буху.",
+          "По сути содержания статьи, про мошенников и моё признание вины, как было на самом деле, — читайте <a href=\"https://www.dlnews.com/research/internal/pardon-me-a-qa-with-anatoly-legkodymov/\">моё интервью</a>."
+        ],
+        image: "../../news/meme.jpg"
+      },
       {
         slug: "freedom-on-paper-extradition-without-evidence",
         date: "5 августа 2026",
