@@ -152,12 +152,38 @@ class Component extends DCLogic {
     activeSlug: null,
     posts: [
       {
+        slug: "russia-us-prisoner-exchange",
+        date: "29 August 2026",
+        tag: "Media",
+        title: "A Russia–U.S. Exchange",
+        paragraphs: [
+          "A prisoner exchange may have been discussed by Russia and the United States during CIA Director John Ratcliffe's visit to Moscow.",
+          "By one account, the main sticking point is that the American side wants to exchange all of its citizens at once. According to Mash, these are the people they are primarily interested in:",
+          "<b>Stephen Hubbard.</b> A 72-year-old U.S. citizen who fought for the Ukrainian armed forces in a territorial defense unit. Sentenced to six years and ten months for mercenary activity.",
+          "<b>Andre Khachaturian.</b> Attempted to bring a Glock 17 service pistol and ammunition into Russia; sentenced to eight years for smuggling and illegal arms trafficking.",
+          "<b>David Barnes.</b> Sexual abuse of his two underage sons, both under 14, born to a Russian citizen. He is serving one of the longest terms among Americans in Russia — 21 years and 6 months in a maximum-security colony.",
+          "<b>Olga Jesler.</b> Serving 10 years for drug smuggling. In June 2022 she flew into Sheremetyevo from the U.S. to care for her sister, who had breast cancer. At customs she declared medications containing prohibited substances.",
+          "<b>Alexander Antonov.</b> Sentenced to six years for pro-Ukrainian comments on Telegram, praising members of the banned extremist Azov group and calling for the killing of Russian soldiers.",
+          "<b>Chuck Zimmerman.</b> Sentenced to five years in a general-regime colony for illegal transport and smuggling of weapons. A U.S. Navy veteran, he was sailing the yacht Trude Zena from the U.S. to New Zealand and detoured into the Black Sea, where a Russian Navy vessel intercepted him. During the search Zimmerman told border guards that a carbine, a pistol and ammunition were aboard for self-defense.",
+          "The Russian side is seeking the release of the following prisoners held in the U.S.:",
+          "<b>Anatoly Legkodymov</b>, a father of several children. Co-founder, co-owner and CTO of the Hong Kong crypto exchange and P2P platform Bitzlato. His American sentence is complete, but France has requested his extradition.",
+          "<b>Oleg Olshansky and Sergey Ivin.</b> Charged with money laundering and sanctions evasion, facing up to 40 years. Olshansky needs urgent surgery.",
+          "<b>Rostislav Ponev.</b> According to the U.S. Department of Justice, he was one of the key code developers and infrastructure administrators for the LockBit hackers. He faces what amounts to a life sentence.",
+          "<b>Oleg Patsulya.</b> The U.S. alleges he ran an international illegal network supplying aviation components to Russia in circumvention of sanctions.",
+          "<b>Yuri Gugnin.</b> Arrested on charges of building a money-laundering and sanctions-evasion scheme. His platform was allegedly used as a covert channel to move more than $530 million out of Russia through American banks and exchanges. He faced 30–60 years or life.",
+          "Human rights advocate and Vice President of the European Center for Human Rights Ivan Melnikov had previously sent appeals to the leadership of Russia and the United States asking that the seriously ill and those with large families be exchanged on humanitarian grounds."
+        ],
+        linkUrl: "https://t.me/mash/77234",
+        linkLabel: "Source"
+      },
+      {
         slug: "glad-relations-are-improving",
         date: "12 August 2026",
         tag: "Note",
         title: "I'm glad relations between the two countries are improving",
         paragraphs: [
-          "<a href=\"https://www.theguardian.com/world/2026/aug/11/russia-frees-ex-us-marine-robert-gilman\">Russia frees ex-US Marine Robert Gilman</a>. <a href=\"https://www.mk.ru/social/2026/08/12/on-mog-umeret-amerikanec-gilman-vyshel-iz-tyurmy-po-gumanitarnym-osnovaniyam-i-posle-pomilovaniya-putina.html\">MK.ru report</a>."
+          "<a href=\"https://www.theguardian.com/world/2026/aug/11/russia-frees-ex-us-marine-robert-gilman\">Russia frees ex-US Marine Robert Gilman</a>",
+          "<a href=\"https://www.mk.ru/social/2026/08/12/on-mog-umeret-amerikanec-gilman-vyshel-iz-tyurmy-po-gumanitarnym-osnovaniyam-i-posle-pomilovaniya-putina.html\">He could have died: American Gilman leaves prison on humanitarian grounds after Putin's pardon</a>"
         ]
       },
       {
@@ -222,7 +248,7 @@ class Component extends DCLogic {
         slug: "radio-in-an-american-prison",
         date: "21 July 2026",
         tag: "Note",
-        title: "Radio in an American Prison: Four Minutes of Freedom an Hour",
+        title: "Radio in an American Prison",
         paragraphs: [
           "Many people ask what I do while held captive by the French. Let me share a small piece of my daily life.",
           "In some U.S. federal prisons, inmates are allowed to use a radio. It's a rather unusual privilege. The selection is modest — around fifteen stations are available — but even that is a small joy, a way to break up the monotony of prison routine.",
@@ -421,7 +447,7 @@ class Component extends DCLogic {
     const posts = this.state.posts.map(p => ({
       ...p,
       href: "#" + p.slug,
-      excerpt: p.excerpt || (p.paragraphs[0].length > 150 ? p.paragraphs[0].slice(0, 150).trim() + "…" : p.paragraphs[0])
+      excerpt: p.excerpt || (stripHtml(p.paragraphs[0]).length > 150 ? stripHtml(p.paragraphs[0]).slice(0, 150).trim() + "…" : stripHtml(p.paragraphs[0]))
     }));
     let activePost = posts.find(p => p.slug === this.state.activeSlug) || null;
     if (activePost) {
