@@ -149,12 +149,38 @@ class Component extends DCLogic {
     activeSlug: null,
     posts: [
       {
+        slug: "russia-us-prisoner-exchange",
+        date: "2026年8月29日",
+        tag: "媒体",
+        title: "俄美交换",
+        paragraphs: [
+          "中情局局长约翰·拉特克利夫访问莫斯科期间，俄美双方或许讨论了交换囚犯的问题。",
+          "据一种说法，最大的障碍在于美方希望一次性换回所有本国公民。据 Mash 消息，美方首先关注的是以下人员：",
+          "<b>斯蒂芬·哈伯德。</b>72岁的美国公民，曾在乌克兰领土防御部队中为乌克兰武装作战。因雇佣兵行为被判处六年十个月监禁。",
+          "<b>安德烈·哈查图里安。</b>试图将一支格洛克17制式手枪及弹药带入俄罗斯，因走私和非法买卖武器被判八年。",
+          "<b>大卫·巴恩斯。</b>对与俄罗斯公民所生的两名未满14岁的儿子实施性侵害。他正在服刑，刑期是在俄美国人中最长的之一——为21年6个月严管级服刑。",
+          "<b>奥尔加·杰斯勒。</b>因走私毒品被判十年。夹2022年6月从美国飞抵谢列梅捷沃，前往照顾患有乳腺癌的姐姐。过海关时，奥尔加申报了含有禁用成分的药品。",
+          "<b>亚历山大·安托诺夫。</b>因在 Telegram 发布亲乌克兰言论被判六年。他赞扰被禁止的“亚速”极端组织成员，并鲓动杀害俄罗斯士兵。",
+          "<b>查克·齐默曼。</b>因非法运输和走私武器被判处五年普通级服刑。这位美国海军老兵驾驶帆船 Trude Zena 从美国前往新西兰，中途绕行进入黑海，被俄罗斯海军舰艇拦截。在检查中，齐默曼向边防人员表示，船上携带的卡宾枪、手枪和弹药是用于自卫的。",
+          "俄方则争取释放以下在美国服刑的人员：",
+          "<b>阿纳托利·列格科德莫夫</b>，多子女的父亲。香港加密货币交易所及 P2P 平台 Bitzlato 的联合创始人、共同持有人兼首席技术官。他在美国的刑期已服完，但法国随后提出了引渡请求。",
+          "<b>奥列格·奥尔沙斯基与谢尔盖·伊文。</b>被指控洗钱和规避制裁，最高可判至40年监禁。奥尔沙斯基需要紧急手术。",
+          "<b>罗斯提斯拉夫·波涅夫。</b>据美国司法部称，他是黑客组织 LockBit 的核心代码开发者和基础设施管理者之一。他面临的实际上是终身监禁。",
+          "<b>奥列格·帕设利亚。</b>美方认为他领导了一个规避制裁、向俄罗斯供应航空零部件的国际非法网络。",
+          "<b>尤里·古格宁。</b>因涉嫌搭建洗钱和规避制裁的运作体系而被捕。据称其平台被用作隐秘渠道，通过美国银行和交易所从俄罗斯转出超过5.3亿美元。他曾面临30至60年监禁乙至终身监禁。",
+          "人权活动家、欧洲人权中心副主席伊凡·梅尔尼科夫此前曾向俄美两国领导层递交呼吁信，请求基于人道主义考虑优先交换重病患者和多子女父亲。"
+        ],
+        linkUrl: "https://t.me/mash/77234",
+        linkLabel: "消息来源"
+      },
+      {
         slug: "glad-relations-are-improving",
         date: "2026年8月12日",
         tag: "随笔",
         title: "我很高兴两国关系正在改善",
         paragraphs: [
-          "<a href=\"https://www.theguardian.com/world/2026/aug/11/russia-frees-ex-us-marine-robert-gilman\">Russia frees ex-US Marine Robert Gilman</a>。<a href=\"https://www.mk.ru/social/2026/08/12/on-mog-umeret-amerikanec-gilman-vyshel-iz-tyurmy-po-gumanitarnym-osnovaniyam-i-posle-pomilovaniya-putina.html\">MK.ru 报道</a>。"
+          "<a href=\"https://www.theguardian.com/world/2026/aug/11/russia-frees-ex-us-marine-robert-gilman\">Russia frees ex-US Marine Robert Gilman</a>",
+          "<a href=\"https://www.mk.ru/social/2026/08/12/on-mog-umeret-amerikanec-gilman-vyshel-iz-tyurmy-po-gumanitarnym-osnovaniyam-i-posle-pomilovaniya-putina.html\">他本可能死于狄中：在普京特赦后，美国人吉尔曼因人道主义理由获释</a>"
         ]
       },
       {
@@ -219,7 +245,7 @@ class Component extends DCLogic {
         slug: "radio-in-an-american-prison",
         date: "2026年7月21日",
         tag: "随笔",
-        title: "美国监狱里的收音机:每小时四分钟的自由",
+        title: "美国监狱里的收音机",
         paragraphs: [
           "很多人问我,被法国方面关押期间都在做些什么。分享一点日常生活。",
           "在美国的一些联邦监狱里,囚犯被允许使用收音机。这是一项相当不寻常的特权。不过选择不多——大约有十五个电台可收听,但即便如此也是一点小小的慰藉,能帮助打发单调的狱中日子。",
@@ -418,7 +444,7 @@ class Component extends DCLogic {
     const posts = this.state.posts.map(p => ({
       ...p,
       href: "#" + p.slug,
-      excerpt: p.excerpt || (p.paragraphs[0].length > 70 ? p.paragraphs[0].slice(0, 70).trim() + "…" : p.paragraphs[0])
+      excerpt: p.excerpt || (stripHtml(p.paragraphs[0]).length > 70 ? stripHtml(p.paragraphs[0]).slice(0, 70).trim() + "…" : stripHtml(p.paragraphs[0]))
     }));
     let activePost = posts.find(p => p.slug === this.state.activeSlug) || null;
     if (activePost) {

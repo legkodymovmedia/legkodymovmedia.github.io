@@ -149,12 +149,38 @@ class Component extends DCLogic {
     activeSlug: null,
     posts: [
       {
+        slug: "russia-us-prisoner-exchange",
+        date: "29 août 2026",
+        tag: "Médias",
+        title: "Un échange Russie–États-Unis",
+        paragraphs: [
+          "Un échange de prisonniers aurait pu être évoqué par la Russie et les États-Unis lors de la visite à Moscou du directeur de la CIA, John Ratcliffe.",
+          "Selon une version, le principal point de blocage serait que la partie américaine souhaite échanger tous ses ressortissants d'un seul coup. D'après Mash, voici les personnes qui l'intéressent en premier lieu :",
+          "<b>Stephen Hubbard.</b> Citoyen américain de 72 ans, il a combattu pour les forces armées ukrainiennes au sein d'une unité de défense territoriale. Condamné à six ans et dix mois pour mercenariat.",
+          "<b>Andre Khatchatourian.</b> A tenté d'introduire en Russie un pistolet de service Glock 17 et des munitions ; condamné à huit ans pour contrebande et trafic d'armes.",
+          "<b>David Barnes.</b> Violences sexuelles sur ses deux fils mineurs, tous deux âgés de moins de 14 ans, nés d'une citoyenne russe. Il purge l'une des peines les plus longues parmi les Américains détenus en Russie — 21 ans et 6 mois en colonie à régime strict.",
+          "<b>Olga Jesler.</b> Condamnée à 10 ans pour trafic de stupéfiants. En juin 2022, elle est arrivée des États-Unis à Cheremetievo pour s'occuper de sa sœur atteinte d'un cancer du sein. À la douane, elle a déclaré des médicaments contenant des substances interdites.",
+          "<b>Alexandre Antonov.</b> Condamné à six ans pour des commentaires pro-ukrainiens sur Telegram, où il faisait l'éloge de membres du groupe extrémiste interdit Azov et appelait à tuer des soldats russes.",
+          "<b>Chuck Zimmerman.</b> Condamné à cinq ans en colonie à régime commun pour transport et contrebande illégaux d'armes. Vétéran de la marine américaine, il naviguait sur le voilier Trude Zena des États-Unis vers la Nouvelle-Zélande et a fait un détour en mer Noire, où un navire de la marine russe l'a intercepté. Lors de la fouille, Zimmerman a déclaré aux gardes-frontières qu'une carabine, un pistolet et des munitions se trouvaient à bord pour sa propre défense.",
+          "La partie russe demande la libération des détenus suivants aux États-Unis :",
+          "<b>Anatoly Legkodymov</b>, père de plusieurs enfants. Cofondateur, copropriétaire et directeur technique de la plateforme d'échange de cryptomonnaies et P2P hongkongaise Bitzlato. Sa peine américaine est purgée, mais la France a demandé son extradition.",
+          "<b>Oleg Olchanski et Sergueï Ivine.</b> Accusés de blanchiment d'argent et de contournement des sanctions, ils encourent jusqu'à 40 ans. Olchanski a besoin d'une opération urgente.",
+          "<b>Rostislav Ponev.</b> Selon le ministère américain de la Justice, il serait l'un des principaux développeurs de code et administrateurs d'infrastructure du groupe de hackers LockBit. Il risque une peine équivalant à la perpétuité.",
+          "<b>Oleg Patsulya.</b> Les États-Unis affirment qu'il dirigeait un réseau international illégal de fourniture de composants aéronautiques à la Russie en contournement des sanctions.",
+          "<b>Iouri Gougnine.</b> Arrêté pour avoir monté un dispositif de blanchiment d'argent et de contournement des sanctions. Sa plateforme aurait servi de canal dissimulé pour transférer plus de 530 millions de dollars depuis la Russie via des banques et des bourses américaines. Il risquait de 30 à 60 ans, voire la perpétuité.",
+          "Le défenseur des droits humains et vice-président du Centre européen des droits de l'homme Ivan Melnikov avait précédemment adressé des appels aux dirigeants russes et américains, demandant que les détenus gravement malades et les pères de familles nombreuses soient échangés pour des raisons humanitaires."
+        ],
+        linkUrl: "https://t.me/mash/77234",
+        linkLabel: "Source"
+      },
+      {
         slug: "glad-relations-are-improving",
         date: "12 août 2026",
         tag: "Note",
         title: "Je suis heureux que les relations entre les deux pays s'améliorent",
         paragraphs: [
-          "<a href=\"https://www.theguardian.com/world/2026/aug/11/russia-frees-ex-us-marine-robert-gilman\">Russia frees ex-US Marine Robert Gilman</a>. <a href=\"https://www.mk.ru/social/2026/08/12/on-mog-umeret-amerikanec-gilman-vyshel-iz-tyurmy-po-gumanitarnym-osnovaniyam-i-posle-pomilovaniya-putina.html\">Rapport de MK.ru</a>."
+          "<a href=\"https://www.theguardian.com/world/2026/aug/11/russia-frees-ex-us-marine-robert-gilman\">Russia frees ex-US Marine Robert Gilman</a>",
+          "<a href=\"https://www.mk.ru/social/2026/08/12/on-mog-umeret-amerikanec-gilman-vyshel-iz-tyurmy-po-gumanitarnym-osnovaniyam-i-posle-pomilovaniya-putina.html\">Il aurait pu mourir : l'Américain Gilman sort de prison pour raisons humanitaires après la grâce de Poutine</a>"
         ]
       },
       {
@@ -219,7 +245,7 @@ class Component extends DCLogic {
         slug: "radio-in-an-american-prison",
         date: "21 juillet 2026",
         tag: "Note",
-        title: "La radio en prison américaine : quatre minutes de liberté par heure",
+        title: "La radio en prison américaine",
         paragraphs: [
           "Beaucoup me demandent ce que je fais, retenu captif par les Français. Je partage ici un petit aperçu de mon quotidien.",
           "Dans certaines prisons fédérales américaines, les détenus sont autorisés à écouter la radio. C'est un privilège plutôt inhabituel. Le choix reste toutefois limité : environ quinze stations sont disponibles, mais c'est déjà une petite joie qui aide à rompre la monotonie du quotidien carcéral.",
@@ -418,7 +444,7 @@ class Component extends DCLogic {
     const posts = this.state.posts.map(p => ({
       ...p,
       href: "#" + p.slug,
-      excerpt: p.excerpt || (p.paragraphs[0].length > 150 ? p.paragraphs[0].slice(0, 150).trim() + "…" : p.paragraphs[0])
+      excerpt: p.excerpt || (stripHtml(p.paragraphs[0]).length > 150 ? stripHtml(p.paragraphs[0]).slice(0, 150).trim() + "…" : stripHtml(p.paragraphs[0]))
     }));
     let activePost = posts.find(p => p.slug === this.state.activeSlug) || null;
     if (activePost) {
