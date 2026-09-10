@@ -166,6 +166,7 @@ class Component extends DCLogic {
     posts: [
       {
         slug: "i-dont-believe-in-crypto",
+        draft: true,
         date: "7 September 2026",
         tag: "Article",
         title: "I Don't Believe in Crypto",
@@ -195,9 +196,9 @@ class Component extends DCLogic {
           "The next method of undermining the reputation of cryptocurrencies is to split the user community from within. Roger Ver's book \"Hijacking Bitcoin\" is devoted to this. Blockstream, a company that never released a successful product, funded to the tune of a third of a billion by French bankers - successfully split the Bitcoin user community. That's exactly why Bitcoin's share of the whole cryptocurrency basket falls year after year, and is already below 50%. I won't reveal more of the book's contents - it's worth reading.",
           "The next method is plain censorship. Just as \"in the freest country\" they banned the sitting president on twitter. If you care about Bitcoin, you can look into the difference on reddit between r/Bitcoin and r/Btc. There is a very detailed review of what happened in those years <a href=\"https://medium.com/@johnblocke/a-brief-and-incomplete-history-of-censorship-in-r-bitcoin-c85a290fe43\">(*)</a>",
           "Let's go further. You've surely never bought coffee with crypto. Neither have I. In many states the use of cryptocurrencies to buy goods and services is simply prohibited. Here the state can be understood - it's the analogue of restrictive measures for foreign currencies (you can't buy coffee with U.S. dollars in every country right now, for instance). Cryptocurrencies thereby lose the main function of money - as an instrument of exchange. Side effect: since you can't buy coffee/bread with crypto - there will be people who buy something illegal. This artificially inflates the share of cryptocurrency turnover going to illegal goods. Very convenient for crypto's opponents.",
-          "One more reason - disillusioned investors. \"Investors\" in quotation marks, because crypto wasn't created for profiteering. Not for hype, not for making money. Few people understand what cryptocurrencies were invented for",
-          "The Satoshi Whitepaper is a good place to start understanding. It's the crypto media - the Russian ones especially - that turned everything upside down. The crypto media are all those who rocked the boat, putting all this hodl, hamsters, FOMO, and so on into circulation",
-          "The crypto media - accomplices in a global fraud - left millions of people deceived. Instead of telling real stories, they gorged on hype to the fullest. The crypto media gorged on hype around the events involving me as well.",
+          "One more reason - disillusioned investors. \"Investors\" in quotation marks, because crypto wasn't created for profiteering. Not for hype, not for making money. Few people understand what cryptocurrencies were invented for.",
+          "The Satoshi Whitepaper is a good place to start understanding.",
+          "The crypto media - the Russian ones especially - turned everything upside down. The crypto media are all those who rocked the boat, putting all this hodl, hamsters, FOMO, and so on into circulation. The crypto media - accomplices in a global fraud - left millions of people deceived. Instead of telling real stories, they gorged on hype to the fullest. The crypto media gorged on hype around the events involving me as well.",
           "Instead of real news - attempts to influence the price of Bitcoin. A fart on the left - the price went up. A turd on the right - the market crashed. That's how the crypto media try to explain Bitcoin's price and the reason for their own importance. But the price of cryptocurrencies has deeper causes for its rises and falls. Millions of people lost money because of the crypto media, and were left looking like fools. Reddit r/Btc is the only thing that was worthy of my attention in all 15 years; almost everything else is informational slop.",
           "The public organizations that could have defended the interests of cryptocurrencies turned out to be non-functional. The Bitcoin Foundation didn't last long. IDACB (International Decentralized Association of Cryptocurrency and Blockchain) was created by the bankers themselves to fight against cryptocurrencies. Not one of the public organizations contacted me after my arrest. And their informational support would have come in very handy.",
           "Lone public figures, ambassadors of one cryptocurrency or another, are \"picked off\" in both the literal and the figurative sense. People can't withstand the bankers' pressure. Consider the stories of John McAfee, Charlie Shrem, Vigil Griffith. I think Satoshi Nakomoto is no longer among us, among the living, either.",
@@ -507,6 +508,7 @@ class Component extends DCLogic {
       excerpt: p.excerpt || (stripHtml(p.paragraphs[0]).length > 150 ? stripHtml(p.paragraphs[0]).slice(0, 150).trim() + "…" : stripHtml(p.paragraphs[0]))
     }));
     let activePost = posts.find(p => p.slug === this.state.activeSlug) || null;
+    const visiblePosts = posts.filter(p => !p.draft);
     if (activePost) {
       activePost = {
         ...activePost,
@@ -516,7 +518,7 @@ class Component extends DCLogic {
       };
     }
     return {
-      posts,
+      posts: visiblePosts,
       activePost,
       hasActive: !!activePost,
       showList: !activePost
