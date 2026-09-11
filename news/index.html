@@ -62,7 +62,9 @@
         <span style="font:600 10.5px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.06em;color:#9c2f22;background:#faeeec;padding:3px 9px;border-radius:2px">{{ activePost.tag }}</span>
         <span style="font:500 12px 'IBM Plex Mono',monospace;color:#888">{{ activePost.date }}</span>
       </div>
-      <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:34px;line-height:1.2;margin:0 0 26px;color:#111">{{ activePost.title }}</h1>
+      <sc-if value="{{ activePost.title }}" hint-placeholder-val="{{ true }}">
+        <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:34px;line-height:1.2;margin:0 0 26px;color:#111">{{ activePost.title }}</h1>
+      </sc-if>
       <div style="font-size:17px;line-height:1.8;color:#222">
         <sc-for list="{{ activePost.htmlParagraphs }}" as="para" hint-placeholder-count="3">
           <p style="margin:0 0 18px" dangerouslySetInnerHTML="{{ para }}"></p>
@@ -130,7 +132,9 @@
               <span style="font:600 10.5px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.06em;color:#9c2f22;background:#faeeec;padding:3px 9px;border-radius:2px">{{ post.tag }}</span>
               <span style="font:500 12px 'IBM Plex Mono',monospace;color:#888">{{ post.date }}</span>
             </div>
+            <sc-if value="{{ post.title }}" hint-placeholder-val="{{ true }}">
             <h2 class="post-title" style="font-family:'Fraunces',serif;font-weight:600;font-size:23px;line-height:1.3;margin:0 0 10px;color:#111;transition:color .15s">{{ post.title }}</h2>
+          </sc-if>
             <p style="font-size:15px;line-height:1.65;color:#555;margin:0 0 10px;max-width:64ch">{{ post.excerpt }}</p>
             <span style="font:600 11.5px 'IBM Plex Mono',monospace;color:#9c2f22;display:inline-flex;align-items:center;gap:5px">Read article <span class="post-arrow" style="display:inline-block;transition:transform .15s">→</span></span>
           </a>
@@ -289,7 +293,7 @@ class Component extends DCLogic {
         slug: "thank-you-for-the-magazines",
         date: "1 July 2026",
         tag: "Note",
-        title: "On Reading Something Other Than the News",
+        title: "Thank You for the Mail",
         paragraphs: [
           "Thank you to everyone who has sent me magazines and newspapers from Russia. Reading a different point of view, for once, is a breath of fresh air."
         ]
@@ -417,7 +421,7 @@ class Component extends DCLogic {
         slug: "bitzlato-aftermath",
         date: "19 December 2024",
         tag: "Update",
-        title: "On Bitzlato's Aftermath",
+        title: "",
         paragraphs: [
           "Never in my worst nightmare did I imagine that half the company would spend two years behind bars fighting baseless charges — while the executives who remain free aren't focused on rebuilding the company's reputation, but on picking Bitzlato apart piece by piece to build new ventures on its wreckage."
         ],
@@ -428,7 +432,7 @@ class Component extends DCLogic {
         slug: "ethereum-lead-dev-lost",
         date: "6 December 2024",
         tag: "Commentary",
-        title: "Ethereum's Lead Dev Is Lost. Are You Any Closer to Figuring It Out?",
+        title: "Ethereum's Lead Dev Doesn't Get What's Going On — Do You?",
         paragraphs: [
           "News trickles down slowly here. I only recently learned that Ethereum's development lead publicly likened the crypto space to a giant casino. No kidding.",
           "The broader narrative around crypto keeps clouding why Bitcoin was created in the first place — as a response to currencies that governments have always devalued. If you want more of that kind of thinking, my recommended reading list has plenty."

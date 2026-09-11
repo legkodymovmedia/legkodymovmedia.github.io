@@ -62,7 +62,9 @@
         <span style="font:600 10.5px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.06em;color:#9c2f22;background:#faeeec;padding:3px 9px;border-radius:2px">{{ activePost.tag }}</span>
         <span style="font:500 12px 'IBM Plex Mono',monospace;color:#888">{{ activePost.date }}</span>
       </div>
-      <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:32px;line-height:1.3;margin:0 0 26px;color:#111">{{ activePost.title }}</h1>
+      <sc-if value="{{ activePost.title }}" hint-placeholder-val="{{ true }}">
+        <h1 style="font-family:'Fraunces',serif;font-weight:600;font-size:32px;line-height:1.3;margin:0 0 26px;color:#111">{{ activePost.title }}</h1>
+      </sc-if>
       <div style="font-size:17px;line-height:1.9;color:#222">
         <sc-for list="{{ activePost.htmlParagraphs }}" as="para" hint-placeholder-count="3">
           <p style="margin:0 0 18px" dangerouslySetInnerHTML="{{ para }}"></p>
@@ -130,7 +132,9 @@
               <span style="font:600 10.5px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.06em;color:#9c2f22;background:#faeeec;padding:3px 9px;border-radius:2px">{{ post.tag }}</span>
               <span style="font:500 12px 'IBM Plex Mono',monospace;color:#888">{{ post.date }}</span>
             </div>
+            <sc-if value="{{ post.title }}" hint-placeholder-val="{{ true }}">
             <h2 class="post-title" style="font-family:'Fraunces',serif;font-weight:600;font-size:21px;line-height:1.4;margin:0 0 10px;color:#111;transition:color .15s">{{ post.title }}</h2>
+          </sc-if>
             <p style="font-size:15px;line-height:1.75;color:#555;margin:0 0 10px;max-width:64ch">{{ post.excerpt }}</p>
             <span style="font:600 11.5px 'IBM Plex Mono',monospace;color:#9c2f22;display:inline-flex;align-items:center;gap:5px">阅读全文 <span class="post-arrow" style="display:inline-block;transition:transform .15s">→</span></span>
           </a>
@@ -286,7 +290,7 @@ class Component extends DCLogic {
         slug: "thank-you-for-the-magazines",
         date: "2026年7月1日",
         tag: "随笔",
-        title: "读点新闻之外的东西",
+        title: "感谢来信",
         paragraphs: [
           "感谢所有从俄罗斯给我寄来杂志和报纸的人。难得读到不同的观点,这确实是一股新鲜空气。"
         ]
@@ -414,7 +418,7 @@ class Component extends DCLogic {
         slug: "bitzlato-aftermath",
         date: "2024年12月19日",
         tag: "更新",
-        title: "关于 Bitzlato 事件后续",
+        title: "",
         paragraphs: [
           "我做梦也没想到,公司里一半的人会因毫无根据的指控在狱中度过两年——而那些仍然自由的高管们,并没有致力于重建公司声誉,而是在把 Bitzlato 一点点拆解,借助其残骸建立新的项目。"
         ],
@@ -425,7 +429,7 @@ class Component extends DCLogic {
         slug: "ethereum-lead-dev-lost",
         date: "2024年12月6日",
         tag: "评论",
-        title: "以太坊首席开发者也迷失了方向。你搞清楚了吗?",
+        title: "以太坊首席开发者都没搞懂发生了什么,你搞懂了吗?",
         paragraphs: [
           "这里的新闻传得很慢。我最近才知道,以太坊的开发负责人公开将整个加密行业比作一个巨大的赌场。这一点也不奇怪。",
           "围绕加密货币的主流叙事,一直在模糊比特币最初被创造出来的原因——作为对政府一贯贬值的货币的回应。如果你想了解更多这类思考,我的推荐书单里还有很多。"
